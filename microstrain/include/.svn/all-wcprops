@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/stingray/!svn/ver/946/trunk/microstrain/include
+END
+ms3dmg_core.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/stingray/!svn/ver/946/trunk/microstrain/include/ms3dmg_core.h
+END
+timing.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/stingray/!svn/ver/878/trunk/microstrain/include/timing.h
+END
+ms3dmg_ros.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/stingray/!svn/ver/946/trunk/microstrain/include/ms3dmg_ros.h
+END
+serial.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/stingray/!svn/ver/878/trunk/microstrain/include/serial.h
+END

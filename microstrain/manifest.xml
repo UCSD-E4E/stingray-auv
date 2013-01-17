@@ -1,0 +1,15 @@
+<package>
+  <description brief="Microstrain 3DMG IMU">
+    ROS driver for the Microstrain 3DMG IMU.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="dynamic_reconfigure"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="tf"/>
+</package>

@@ -1,0 +1,9 @@
+\subsubsection usage Usage
+\verbatim
+<node name="microstrain" pkg="microstrain" type="microstrain">
+  <param name="port" type="str" value="/dev/ttyUSB0" />
+  <param name="baud" type="int" value="115200" />
+  <param name="reconnect" type="bool" value="False" />
+</node>
+\endverbatim
+
