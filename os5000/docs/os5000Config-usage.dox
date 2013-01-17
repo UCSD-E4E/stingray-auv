@@ -1,0 +1,11 @@
+\subsubsection usage Usage
+\verbatim
+<node name="os5000" pkg="os5000" type="os5000">
+  <param name="port" type="str" value="/dev/ttyUSB0" />
+  <param name="baud" type="int" value="115200" />
+  <param name="rate" type="int" value="40" />
+  <param name="init_time" type="int" value="1" />
+  <param name="reconnect" type="bool" value="False" />
+</node>
+\endverbatim
+

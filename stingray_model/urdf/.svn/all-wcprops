@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/stingray/!svn/ver/971/trunk/stingray_model/urdf
+END
+camera_model.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/stingray/!svn/ver/971/trunk/stingray_model/urdf/camera_model.urdf.xacro
+END
+stingray.urdf.xacro
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/stingray/!svn/ver/964/trunk/stingray_model/urdf/stingray.urdf.xacro
+END

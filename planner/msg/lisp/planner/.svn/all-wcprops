@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner
+END
+TargetStates.lisp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner/TargetStates.lisp
+END
+_package.lisp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner/_package.lisp
+END
+.TargetStates.asd-dep
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner/.TargetStates.asd-dep
+END
+planner-msg.asd
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner/planner-msg.asd
+END
+_package_TargetStates.lisp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/stingray/!svn/ver/861/trunk/planner/msg/lisp/planner/_package_TargetStates.lisp
+END

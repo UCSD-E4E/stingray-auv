@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/stingray/!svn/ver/973/trunk/node_example
+END
+manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/stingray/!svn/ver/861/trunk/node_example/manifest.xml
+END
+node_example.launch
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/stingray/!svn/ver/973/trunk/node_example/node_example.launch
+END
+python_node_example.launch
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/stingray/!svn/ver/973/trunk/node_example/python_node_example.launch
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/stingray/!svn/ver/861/trunk/node_example/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/stingray/!svn/ver/972/trunk/node_example/Makefile
+END
+c++_node_example.launch
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/stingray/!svn/ver/973/trunk/node_example/c++_node_example.launch
+END

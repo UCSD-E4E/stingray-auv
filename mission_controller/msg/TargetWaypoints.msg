@@ -1,0 +1,4 @@
+float64 target_surge
+float64 target_lat
+float64 target_lon
+float64 target_depth

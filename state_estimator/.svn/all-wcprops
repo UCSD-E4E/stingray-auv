@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/stingray/!svn/ver/976/trunk/state_estimator
+END
+mainpage.dox
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/stingray/!svn/ver/861/trunk/state_estimator/mainpage.dox
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/stingray/!svn/ver/975/trunk/state_estimator/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/stingray/!svn/ver/972/trunk/state_estimator/Makefile
+END
+manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/stingray/!svn/ver/861/trunk/state_estimator/manifest.xml
+END

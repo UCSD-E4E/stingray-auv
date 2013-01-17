@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 60
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+msg_gen
+build
+
+END

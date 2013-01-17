@@ -1,0 +1,15 @@
+<package>
+  <description brief="mission_controller">
+     mission_controller
+  </description>
+  <author>Gideon Prior</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mission_controller</url>
+
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  
+  <depend package="state_estimator"/>
+</package>

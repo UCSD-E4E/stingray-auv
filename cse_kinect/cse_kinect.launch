@@ -1,0 +1,14 @@
+<!-- Starts up Kinect nodes, pose tracking and RViz. -->
+
+<launch>
+  <include file="$(find openni_launch)/launch/openni.launch"/>
+
+  <node pkg="openni_tracker" type="openni_tracker" name="openni_tracker"/>
+
+  <node pkg="cse_kinect" type="cse_kinect" name="cse_kinect" output="screen">
+    <param name="rate"           value="50"/>
+    <param name="pub_name_poses" value="cse_pose_data"/>
+  </node>  
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-f camera_depth_optical_frame"/>
+</launch>

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/stingray/!svn/ver/879/trunk/os5000/include
+END
+os5000_core.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/stingray/!svn/ver/878/trunk/os5000/include/os5000_core.h
+END
+serial.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/stingray/!svn/ver/878/trunk/os5000/include/serial.h
+END
+timing.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/stingray/!svn/ver/878/trunk/os5000/include/timing.h
+END
+os5000_ros.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/stingray/!svn/ver/879/trunk/os5000/include/os5000_ros.h
+END

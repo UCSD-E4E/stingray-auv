@@ -1,0 +1,15 @@
+<package>
+  <description brief="ocd_vo">
+    Visual odometry for Obstacle Course Detection.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="dynamic_reconfigure"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="tf"/>
+</package>

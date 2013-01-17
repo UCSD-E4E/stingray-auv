@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+
+<!-- Note that ORDER MATTERS for xmlns! -->
+<robot name="stingray"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:gazebo="http://playerstage.sourceforge.net/gazebo/xmlschema/#gz"
+    xmlns:model="http://playerstage.sourceforge.net/gazebo/xmlschema/#model"
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:body="http://playerstage.sourceforge.net/gazebo/xmlschema/#body"
+    xmlns:geom="http://playerstage.sourceforge.net/gazebo/xmlschema/#geom"
+    xmlns:joint="http://playerstage.sourceforge.net/gazebo/xmlschema/#joint"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    xmlns:rendering="http://playerstage.sourceforge.net/gazebo/xmlschema/#rendering"
+    xmlns:renderable="http://playerstage.sourceforge.net/gazebo/xmlschema/#renderable"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:physics="http://playerstage.sourceforge.net/gazebo/xmlschema/#physics"
+    xmlns:xacro="http://www.ros.org/wiki/xacro"
+>
+
+    <xacro:property name="M_PI"              value="3.1415926535897931"/>
+    <xacro:property name="stingray_mesh_dir" value="package://stingray_model/meshes"/>
+    <xacro:property name="scale_value"       value="0.1"/>
+    <xacro:property name="stereo_baseline"   value="22.0"/>
+    <xacro:property name="chassis_x"         value="91.0"/>
+    <xacro:property name="chassis_y"         value="26.0"/>
+    <xacro:property name="chassis_z"         value="97.0"/>
+    <xacro:property name="camera_length"     value="22.25"/>
+    <xacro:property name="camera_radius"     value="9.5"/>
+
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="${mass*0.1}" ixy="0.0" ixz="0.0" iyy="${mass*0.1}" iyz="0.0" izz="${mass*0.1}"/>
+        </inertial>
+    </xacro:macro>
+
+    <!-- Dummy base_link. Only here to set origin, so make it small. -->
+    <link name="base_link">
+        <xacro:default_inertial mass="1.0"/>
+        
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.01" length="0.01"/>
+            </geometry>
+            <material name="gray">
+                <color rgba=".2 .2 .2 1"/>
+            </material>
+        </visual>
+    
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.01" length=".5"/>
+            </geometry>
+            <contact_coefficients mu="0.0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+    
+    <gazebo reference="base_link">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+   
+    <!-- Stingray chassis. -->
+    <link name="chassis">
+        <xacro:default_inertial mass="45.0"/>
+    
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="${stingray_mesh_dir}/stingray.stl" scale="${scale_value} ${scale_value} ${scale_value}"/>
+            </geometry>
+            <material name="grey">
+                <color rgba="0.5 0.5 0.5 1"/>
+            </material>
+        </visual>
+    
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${chassis_x} ${chassis_y} ${chassis_z}"/>
+            </geometry>
+            <contact_coefficients mu="0.0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+    
+    <gazebo reference="chassis">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+   
+    <!-- Connect base_link and chassis. -->
+    <joint name="base_link_to_chassis" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="chassis"/>
+    </joint>
+   
+   <!-- The left camera in stereo pair. -->
+    <link name="left_camera">
+        <xacro:default_inertial mass="3.0"/>
+    
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="${stingray_mesh_dir}/camera_shell.stl" scale="${scale_value} ${scale_value} ${scale_value}"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1"/>
+            </material>
+        </visual>
+    
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="${camera_radius}" length="${camera_length}"/>
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+    
+    <gazebo reference="left_camera">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    
+    <!-- Connect chassis and left camera. -->
+    <joint name="chassis_to_left_camera" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="left_camera"/>
+    </joint>
+
+   <!-- The right camera in stereo pair. -->
+    <link name="right_camera">
+        <xacro:default_inertial mass="3.0"/>
+    
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="${stingray_mesh_dir}/camera_shell.stl" scale="${scale_value} ${scale_value} ${scale_value}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="${camera_radius}" length="${camera_length}"/>
+            </geometry>
+            <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+        </collision>
+    </link>
+    
+    <gazebo reference="right_camera">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    
+    <!-- Connect chassis and right camera. -->
+    <joint name="chassis_to_right_camera" type="fixed">
+        <origin xyz="${stereo_baseline*scale_value} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="chassis"/>
+        <child link="right_camera"/>
+    </joint>
+
+    <gazebo reference="stingray">
+        <turnGravityOff>true</turnGravityOff>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+
+    <!-- Start a controller manager to move joints. -->
+    <gazebo>
+        <controller:gazebo_ros_time name="gazebo_ros_time" plugin="libgazebo_ros_time.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>1000.0</updateRate>
+            <interface:audio name="dummy_gazebo_ros_time_iface_should_not_be_here"/>
+        </controller:gazebo_ros_time>
+
+        <controller:gazebo_ros_controller_manager name="gazebo_controller_manager" plugin="libgazebo_ros_controller_manager.so">
+            <alwaysOn>true</alwaysOn>
+            <robotParam>robot_description</robotParam>
+            <updateRate>1000.0</updateRate>
+            <interface:audio name="gazebo_mechanism_control_dummy_iface" />
+        </controller:gazebo_ros_controller_manager>
+    </gazebo>
+
+</robot>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/stingray/!svn/ver/947/trunk/stingray_model/meshes
+END
+get_hi_res_meshes.sh
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/stingray/!svn/ver/947/trunk/stingray_model/meshes/get_hi_res_meshes.sh
+END
+get_lo_res_meshes.sh
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/stingray/!svn/ver/947/trunk/stingray_model/meshes/get_lo_res_meshes.sh
+END

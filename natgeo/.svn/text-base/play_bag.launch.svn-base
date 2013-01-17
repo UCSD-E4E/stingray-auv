@@ -1,0 +1,44 @@
+<launch>
+
+    
+
+
+    <param name="/use_sim_time" value="true"/>
+
+    <arg name="left_ip"      default="192.168.3.101"/>
+    <arg name="right_ip"     default="192.168.3.102"/>
+    <arg name="left_yaml"    default="101"/>
+    <arg name="right_yaml"   default="102"/>
+    <arg name="start_stereo" default="true"/>
+
+    
+    <!--include file="$(find stingray_model)/camera_model.launch"/-->
+    <!-- play bag file -->
+    <node pkg="rosbag" type="play" name="rosbag_play"
+          args="$(find natgeo)/bags/input.bag --clock">
+    </node>
+
+    <!-- subscribe to point clouds2 -->
+    <group ns="stereo">
+        <group if="$(arg start_stereo)">
+            <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc">
+                <param name="approximate_sync" value="True"/>
+                <param name="queue_size"       value="10"/>
+            </node>
+        </group>
+    </group>
+
+    <group if="$(arg start_stereo)">
+        <node pkg="image_view" type="stereo_view" name="stereo_view" output="screen">
+            <remap from="stereo" to="stereo"/>
+            <remap from="image"  to="image_rect_color"/>
+            <param name="approximate_sync" value="True"/>
+        </node>
+    </group>
+
+
+
+
+    
+
+</launch>

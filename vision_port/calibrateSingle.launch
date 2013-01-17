@@ -1,0 +1,16 @@
+<!--
+Starts a Prosilica camera and the calibration utility.
+-->
+
+<launch>
+    <!-- The camera node publishes raw images. -->
+    <node
+        pkg="camera1394" type="camera1394" name="left_camera" output="screen">
+    </node>
+
+    <!-- Camera calibration node. -->
+    <node
+        pkg="camera_calibration" type="cameracalibrator.py" name="camera_calibration"
+        args="--size 7x6 --square 0.054 image:=/camera/image_raw camera:=/camera">
+    </node>
+</launch>

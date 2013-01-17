@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/stingray/!svn/ver/972/trunk/jsp
+END
+jsp.launch
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/stingray/!svn/ver/958/trunk/jsp/jsp.launch
+END
+manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/stingray/!svn/ver/875/trunk/jsp/manifest.xml
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/stingray/!svn/ver/873/trunk/jsp/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/stingray/!svn/ver/972/trunk/jsp/Makefile
+END

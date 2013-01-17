@@ -1,0 +1,18 @@
+<package>
+  <description brief="Vision Node">
+    Vision algorithms.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+  
+  <depend package="actionlib"/>
+  <depend package="cv_bridge"/>
+  <depend package="dynamic_reconfigure"/>
+  <depend package="image_transport"/>
+  <depend package="opencv2"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+</package>

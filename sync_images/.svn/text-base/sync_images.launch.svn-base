@@ -1,0 +1,12 @@
+<launch>
+    <node pkg="sync_images" type="sync_images" name="sync_images">
+      <param name="pub_topic_left"  value="sync/left/image_rect"/>
+      <param name="pub_topic_right" value="sync/right/image_rect"/>
+      <param name="pub_info_left"   value="sync/left/camera_info"/>
+      <param name="pub_info_right"  value="sync/right/camera_info"/>
+      <param name="sub_topic_left"  value="left/image_rect"/>
+      <param name="sub_topic_right" value="right/image_rect"/>
+      <param name="sub_info_left"   value="left/camera_info"/>
+      <param name="sub_info_right"  value="right/camera_info"/>
+    </node>
+</launch>

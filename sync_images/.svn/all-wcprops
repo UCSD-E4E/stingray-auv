@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/stingray/!svn/ver/977/trunk/sync_images
+END
+sync_images.launch
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/stingray/!svn/ver/958/trunk/sync_images/sync_images.launch
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/stingray/!svn/ver/977/trunk/sync_images/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/stingray/!svn/ver/972/trunk/sync_images/Makefile
+END
+manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/stingray/!svn/ver/861/trunk/sync_images/manifest.xml
+END

@@ -1,0 +1,50 @@
+<!-- Run stereo VSLAM on wide stereo data. -->
+
+<launch>
+    <group ns="wide_stereo">
+        <node
+            pkg="vslam_system"
+            type="stereo_vslam_node"
+            name="stereo_vslam_node"
+            args="$(find vocabulary_tree)/holidays.tree $(find vocabulary_tree)/holidays.weights $(find vslam_system)/data/calonder.rtc"
+            output="screen"
+            cwd="node">
+
+   <!-- Try     	<param
+		        name="frame_id"
+		        type="str"
+		        value="wide_stereo_frame"
+		    />
+          <param
+                name="approximate_sync"
+                type="bool"
+                value="True"
+            />
+            <param
+                name="approximate"
+				type="double"
+                value="0.01"
+            />		-->
+
+		</node>
+    </group>
+
+    <!-- Show visual odometry tracks and left/right images.     -->
+    <node
+        pkg="image_view"
+        type="image_view"
+        name="vo_tracks_view">
+        <remap
+            from="image"
+            to="/vslam/vo_tracks/image"
+        />
+        <remap
+            from="left"
+            to="/stereo/left"
+        />
+        <remap
+            from="right"
+            to="/stereo/right"
+        />
+    </node>
+</launch>

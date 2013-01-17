@@ -1,0 +1,29 @@
+<launch>
+    <arg name="ip_left"  default="192.168.3.101"/>
+    <arg name="ip_right" default="192.168.3.102"/>
+
+    <group ns="stereo">
+        <node pkg="prosilica_camera" type="prosilica_node" name="left" output="screen">
+            <param name="ip_address" value="$(arg ip_left)"/>
+            <remap from="camera" to="left"/>
+            <rosparam command="load" file="$(find ocd_vo)/cameras/camera.yaml"/>
+        </node>
+
+        <node pkg="prosilica_camera" type="prosilica_node" name="right" output="screen">
+            <param name="ip_address" value="$(arg ip_right)"/>
+            <remap from="camera" to="right"/>
+            <rosparam command="load" file="$(find ocd_vo)/cameras/camera.yaml"/>
+        </node>
+
+        <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc">
+            <param name="approximate_sync" value="True"/>
+            <param name="queue_size"       value="10"/>
+        </node>
+    </group>
+
+    <node pkg="image_view" type="stereo_view" name="stereo_view" output="screen">
+        <remap from="stereo" to="stereo"/>
+        <remap from="image"  to="image_rect_color"/>
+        <param name="approximate_sync" value="True"/>
+    </node>
+</launch>

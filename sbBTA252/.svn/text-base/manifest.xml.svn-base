@@ -1,0 +1,15 @@
+<package>
+  <description brief="Thrusters">
+    ROS driver for the thrusters.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="dynamic_reconfigure"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  
+  <depend package="nav"/>
+</package>

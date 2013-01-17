@@ -1,0 +1,14 @@
+<package>
+  <description brief="Example joint state publisher.">
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="dynamic_reconfigure"/>
+  <depend package="nav_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="tf"/>
+</package>

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/stingray/!svn/ver/977/trunk/usb1208ls
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/stingray/!svn/ver/880/trunk/usb1208ls/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/stingray/!svn/ver/972/trunk/usb1208ls/Makefile
+END
+60-mcc.rules
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/stingray/!svn/ver/861/trunk/usb1208ls/60-mcc.rules
+END
+manifest_.xml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/stingray/!svn/ver/977/trunk/usb1208ls/manifest_.xml
+END

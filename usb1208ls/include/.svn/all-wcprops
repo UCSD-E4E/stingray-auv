@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/stingray/!svn/ver/861/trunk/usb1208ls/include
+END
+pmd_dependencies.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/stingray/!svn/ver/861/trunk/usb1208ls/include/pmd_dependencies.h
+END
+pmd.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/stingray/!svn/ver/861/trunk/usb1208ls/include/pmd.h
+END
+usb-1208LS.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/stingray/!svn/ver/861/trunk/usb1208ls/include/usb-1208LS.h
+END

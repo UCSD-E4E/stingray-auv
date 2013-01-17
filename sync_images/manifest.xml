@@ -1,0 +1,18 @@
+<package>
+  <description brief="Sync Image Data">
+    Sync image data from stereo pair.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="cv_bridge"/>
+  <depend package="stereo_image_proc"/>
+  <depend package="image_transport"/>
+  <depend package="message_filters"/>
+  <depend package="opencv2"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="std_msgs"/>
+</package>

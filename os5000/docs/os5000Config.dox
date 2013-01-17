@@ -1,0 +1,10 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~port" : \b [str] The port the compass is plugged into. min: , default: /dev/ttyUSB0, max: 
+- \b "~baud" : \b [int] The baud rate of the compass. min: 2400, default: 115200, max: 115200
+- \b "~rate" : \b [int] The rate the compass should output data. min: -50, default: 40, max: 40
+- \b "~init_time" : \b [int] The amount of time to connect to compass. min: 1, default: 1, max: 10
+- \b "~reconnect" : \b [bool] Whether to attempt to reconnect to compass. min: False, default: False, max: True
+

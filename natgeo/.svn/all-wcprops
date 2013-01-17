@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/stingray/!svn/ver/975/trunk/natgeo
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/stingray/!svn/ver/960/trunk/natgeo/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/stingray/!svn/ver/972/trunk/natgeo/Makefile
+END
+gc750c.launch
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/stingray/!svn/ver/963/trunk/natgeo/gc750c.launch
+END
+manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/stingray/!svn/ver/960/trunk/natgeo/manifest.xml
+END
+play_bag.launch
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/stingray/!svn/ver/971/trunk/natgeo/play_bag.launch
+END
+record.launch
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/stingray/!svn/ver/965/trunk/natgeo/record.launch
+END
+gc750c_calibration.launch
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/stingray/!svn/ver/962/trunk/natgeo/gc750c_calibration.launch
+END

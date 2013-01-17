@@ -1,0 +1,60 @@
+<!--
+Starts a stereo pair of Prosilica cameras and the calibration utility.
+-->
+
+<launch>
+    <!-- Put the cameras and image processing nodes in the "stereo" namespace since this is where the calibration utility expects to find them. -->
+    <group ns="stereo">
+        <!-- The left camera node publishes raw images. -->
+        <node
+            pkg="prosilica_camera"
+            type="prosilica_node" 
+			output="screen"
+            name="left">
+            <param
+                name="ip_address"
+                type="str"
+                value="192.168.2.102"
+            />
+            <param
+                name="trigger_mode"
+                type="str"
+                value="streaming"
+            />
+            <remap
+                from="camera"
+                to="left"
+            />
+            <rosparam
+                command="load"
+                file="$(find prosilica_camera)/cam_settings.yaml"
+            />
+        </node>
+
+        <!-- The right camera node publishes raw images. -->
+        <node
+            pkg="prosilica_camera"
+            type="prosilica_node" 
+			output="screen"
+            name="right">
+            <param
+                name="ip_address"
+                type="str"
+                value="192.168.2.101"
+            />
+            <param
+                name="trigger_mode"
+                type="str"
+                value="streaming"
+            />
+            <remap
+                from="camera"
+                to="right"
+            />
+            <rosparam
+                command="load"
+                file="$(find prosilica_camera)/cam_settings.yaml"
+            />
+	   </node>
+    </group>
+</launch>

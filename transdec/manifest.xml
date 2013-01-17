@@ -1,0 +1,16 @@
+<package>
+  <description brief="Transdec">
+    State machine and actionlib servers/clients to use for AUVSI
+    competition at Transdec test pool.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="smach"/>
+  <depend package="smach_ros"/>
+  <depend package="std_msgs"/>
+</package>

@@ -1,0 +1,16 @@
+Header header
+float32 lat
+float32 lon
+float32 depth 
+float32 roll 
+float32 pitch
+float32 yaw
+float32 surge
+float32 sway
+float32 heave
+float32 surge_dot
+float32 sway_dot
+float32 heave_dot
+float32 mag_x
+float32 mag_y
+float32 mag_z

@@ -1,0 +1,17 @@
+<launch>
+    <arg name="ip_address" value="192.168.3.101"/>
+
+    <node pkg="prosilica_camera" type="prosilica_node" name="prosilica_left" output="screen">
+        <param name="ip_address" value="$(arg ip_address)"/>
+        <remap from="camera" to="camera"/>
+        <rosparam command="load" file="$(find ocd_vo)/cameras/camera.yaml"/>
+    </node>
+
+    <group ns="camera">
+        <node pkg="image_proc" type="image_proc" name="left_image_proc" respawn="false"/>
+
+        <node pkg="image_view" type="image_view" name="left_viewer">
+            <remap from="image" to="image_rect"/>
+        </node>
+    </group>
+</launch>

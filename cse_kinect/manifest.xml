@@ -1,0 +1,14 @@
+<package>
+  <description brief="CSE145 Kinect">
+    CSE145 class project to find poses from a human user in Kinect data.
+  </description>
+  <author>Thomas Denewiler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+  
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="tf"/>
+</package>

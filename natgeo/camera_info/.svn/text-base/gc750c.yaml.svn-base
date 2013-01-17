@@ -1,0 +1,9 @@
+################################################################
+# Camera Parameters
+# See http://www.ros.org/wiki/prosilica_camera for more details.
+################################################################
+
+# Trigger mode to use streaming, polled or hardware triggers.
+trigger_mode: streaming
+# The frame_id MUST be part of your URDF to display stereo data correctly in RViz.
+frame_id: camera_optical_frame
