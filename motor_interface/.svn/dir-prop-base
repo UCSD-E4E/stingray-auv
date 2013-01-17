@@ -1,9 +1,0 @@
-K 10
-svn:ignore
-V 52
-CMakeCache.txt
-cmake_install.cmake
-CMakeFiles
-build
-
-END
