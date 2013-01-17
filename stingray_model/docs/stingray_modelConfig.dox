@@ -1,0 +1,7 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~path_depth" : \b [double] Depth of robot on path min: 0.0, default: 1.0, max: 200.0
+- \b "~path_radius" : \b [double] Radius of robot path min: 0.5, default: 2.0, max: 100.0
+

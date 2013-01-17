@@ -1,0 +1,8 @@
+\subsubsection usage Usage
+\verbatim
+<node name="stingray_model" pkg="stingray_model" type="stingray_model">
+  <param name="path_depth" type="double" value="1.0" />
+  <param name="path_radius" type="double" value="2.0" />
+</node>
+\endverbatim
+
