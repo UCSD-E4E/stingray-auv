@@ -1,0 +1,9 @@
+cmake_install.cmake
+build/
+bin/
+lib/
+.svn/
+msg_gen/*
+src_gen/*
+*.o
+*.pyc
