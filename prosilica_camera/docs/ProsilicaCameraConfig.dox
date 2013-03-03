@@ -1,0 +1,28 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~trigger_mode" : \b [str] Camera trigger mode min: , default: streaming, max: 
+- \b "~auto_exposure" : \b [bool] Sets the camera exposure duration to automatic. Causes the `~exposure` setting to be ignored. min: False, default: True, max: True
+- \b "~exposure" : \b [double] Camera exposure time in seconds. min: 2.5e-05, default: 0.025, max: 60.0
+- \b "~auto_gain" : \b [bool] Sets the analog gain to automatic. Causes the `~gain` setting to be ignored. min: False, default: True, max: True
+- \b "~gain" : \b [int] The gain level in dB. min: 0, default: 0, max: 24
+- \b "~auto_whitebalance" : \b [bool] Whether whitebalance will continuously adjust to the current scene. Causes the `~whitebalance_red` and `~whitebalance_blue` settings to be ignored. min: False, default: True, max: True
+- \b "~whitebalance_red" : \b [int] Red gain as a percentage of the camera default setting. min: 80, default: 100, max: 300
+- \b "~whitebalance_blue" : \b [int] Blue gain as a percentage of the camera default setting. min: 80, default: 100, max: 300
+- \b "~binning_x" : \b [int] Number of pixels to bin together horizontally. min: 1, default: 1, max: 8
+- \b "~binning_y" : \b [int] Number of pixels to bin together vertically. min: 1, default: 1, max: 14
+- \b "~x_offset" : \b [int] X offset of the region of interest. min: 0, default: 0, max: 2447
+- \b "~y_offset" : \b [int] Y offset of the region of interest. min: 0, default: 0, max: 2049
+- \b "~width" : \b [int] Width of the region of interest (0 for automatic). min: 0, default: 0, max: 2448
+- \b "~height" : \b [int] Height of the region of interest (0 for automatic). min: 0, default: 0, max: 2050
+- \b "~frame_id" : \b [str] The optical camera TF frame set in message headers. min: , default: , max: 
+- \b "~trig_timestamp_topic" : \b [str] Sets the topic from which an externally trigged camera receives its trigger timestamps. min: , default: , max: 
+- \b "~trig_rate" : \b [double] Sets the expected triggering rate in externally triggered mode. min: 1.0, default: 15.0, max: 100.0
+- \b "~auto_adjust_stream_bytes_per_second" : \b [bool] Whether the node should automatically adjust the data rate. Causes `~stream_bytes_per_second` to be ignored. min: False, default: True, max: True
+- \b "~stream_bytes_per_second" : \b [int] Limits the data rate of the camera. min: 1, default: 45000000, max: 115000000
+- \b "~exposure_auto_max" : \b [double] The max exposure time in auto exposure mode, in seconds. min: 2.5e-05, default: 0.5, max: 60.0
+- \b "~exposure_auto_target" : \b [int] The auto exposure target mean value as a percentage, from 0=black to 100=white. min: 0, default: 50, max: 100
+- \b "~gain_auto_max" : \b [int] The max gain level in auto gain mode, in dB. min: 0, default: 24, max: 24
+- \b "~gain_auto_target" : \b [int] The auto gain target mean value as a percentage, from 0=black to 100=white. min: 0, default: 50, max: 100
+
