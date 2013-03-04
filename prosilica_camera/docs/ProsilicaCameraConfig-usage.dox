@@ -1,0 +1,29 @@
+\subsubsection usage Usage
+\verbatim
+<node name="prosilica_driver" pkg="prosilica_camera" type="prosilica_driver">
+  <param name="trigger_mode" type="str" value="streaming" />
+  <param name="auto_exposure" type="bool" value="True" />
+  <param name="exposure" type="double" value="0.025" />
+  <param name="auto_gain" type="bool" value="True" />
+  <param name="gain" type="int" value="0" />
+  <param name="auto_whitebalance" type="bool" value="True" />
+  <param name="whitebalance_red" type="int" value="100" />
+  <param name="whitebalance_blue" type="int" value="100" />
+  <param name="binning_x" type="int" value="1" />
+  <param name="binning_y" type="int" value="1" />
+  <param name="x_offset" type="int" value="0" />
+  <param name="y_offset" type="int" value="0" />
+  <param name="width" type="int" value="0" />
+  <param name="height" type="int" value="0" />
+  <param name="frame_id" type="str" value="" />
+  <param name="trig_timestamp_topic" type="str" value="" />
+  <param name="trig_rate" type="double" value="15.0" />
+  <param name="auto_adjust_stream_bytes_per_second" type="bool" value="True" />
+  <param name="stream_bytes_per_second" type="int" value="45000000" />
+  <param name="exposure_auto_max" type="double" value="0.5" />
+  <param name="exposure_auto_target" type="int" value="50" />
+  <param name="gain_auto_max" type="int" value="24" />
+  <param name="gain_auto_target" type="int" value="50" />
+</node>
+\endverbatim
+
