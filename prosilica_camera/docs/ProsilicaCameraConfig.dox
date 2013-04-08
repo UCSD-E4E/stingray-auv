@@ -25,4 +25,5 @@ Reads and maintains the following parameters on the ROS server
 - \b "~exposure_auto_target" : \b [int] The auto exposure target mean value as a percentage, from 0=black to 100=white. min: 0, default: 50, max: 100
 - \b "~gain_auto_max" : \b [int] The max gain level in auto gain mode, in dB. min: 0, default: 24, max: 24
 - \b "~gain_auto_target" : \b [int] The auto gain target mean value as a percentage, from 0=black to 100=white. min: 0, default: 50, max: 100
+- \b "~fixed_rate" : \b [double] The frame rate for fixed mode min: 0.0, default: 10.0, max: 60.0
 

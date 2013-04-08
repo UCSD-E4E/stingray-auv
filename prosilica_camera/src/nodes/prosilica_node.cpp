@@ -73,7 +73,7 @@ private:
   polled_camera::PublicationServer poll_srv_;
   ros::ServiceServer set_camera_info_srv_;
   ros::Subscriber trigger_sub_;
-  
+
   // Camera
   boost::scoped_ptr<prosilica::Camera> cam_;
   prosilica::FrameStartTriggerMode trigger_mode_; /// @todo Make this property of Camera
@@ -94,7 +94,7 @@ private:
   typedef prosilica_camera::ProsilicaCameraConfig Config;
   typedef dynamic_reconfigure::Server<Config> ReconfigureServer;
   ReconfigureServer reconfigure_server_;
-  
+
   // Diagnostics
   ros::Timer diagnostic_timer_;
   boost::shared_ptr<self_test::TestRunner> self_test_;
@@ -145,7 +145,7 @@ public:
     std::string ip_str;
     if (local_nh.getParam("ip_address", ip_str) && !ip_str.empty()) {
       cam_.reset( new prosilica::Camera(ip_str.c_str()) );
-      
+
       // Verify guid is the one expected
       unsigned long cam_guid = cam_->guid();
       if (guid != 0 && guid != cam_guid)
@@ -165,7 +165,7 @@ public:
     tPvUint32 dummy;
     PvAttrRangeUint32(cam_->handle(), "Width", &dummy, &sensor_width_);
     PvAttrRangeUint32(cam_->handle(), "Height", &dummy, &sensor_height_);
-    
+
     // Try to load intrinsics from on-camera memory.
     loadIntrinsics();
 
@@ -177,7 +177,7 @@ public:
     self_test_->add( "Info Test", this, &ProsilicaNode::infoTest );
     self_test_->add( "Attribute Test", this, &ProsilicaNode::attributeTest );
     self_test_->add( "Image Test", this, &ProsilicaNode::imageTest );
-    
+
     diagnostic_.add( "Frequency Status", this, &ProsilicaNode::freqStatus );
     diagnostic_.add( "Frame Statistics", this, &ProsilicaNode::frameStatistics );
     diagnostic_.add( "Packet Statistics", this, &ProsilicaNode::packetStatistics );
@@ -220,7 +220,7 @@ public:
            // ROS_ERROR("Invalid trigger mode '%s' in reconfigure request", config.trigger_mode.c_str());
 
       ///@todo add the fixed rate implementation
-      desired_freq_ = 5;
+      cam_->setAttribute("FrameRate",(tPvFloat32)config.fixed_rate);//1.0;//config.fixed_rate;
     }
 //#endif
     else if (config.trigger_mode == "polled") {
@@ -269,7 +269,7 @@ public:
     }
     else
       cam_->setGain(config.gain, prosilica::Manual);
-    
+
     // White balance
     if (config.auto_whitebalance) {
       if (cam_->hasAttribute("WhitebalMode"))
@@ -289,7 +289,7 @@ public:
       PvAttrRangeUint32(cam_->handle(), "BinningY", &dummy, &max_binning_y);
       config.binning_x = std::min(config.binning_x, (int)max_binning_x);
       config.binning_y = std::min(config.binning_y, (int)max_binning_y);
-      
+
       cam_->setBinning(config.binning_x, config.binning_y);
     }
     else if (config.binning_x > 1 || config.binning_y > 1)
@@ -321,7 +321,7 @@ public:
     height = bottom_y - y_offset;
 
     cam_->setRoi(x_offset, y_offset, width, height);
-    
+
     // TF frame
     img_.header.frame_id = cam_info_.header.frame_id = config.frame_id;
 
@@ -350,7 +350,7 @@ public:
     /// @todo Replace this with robust trigger matching
     trig_time_ = msg->stamp;
   }
-  
+
   ///@todo add the setting of output sync1 and sync2?
 
   void start()
@@ -389,7 +389,7 @@ public:
     poll_srv_.shutdown();
     trigger_sub_.shutdown();
     streaming_pub_.shutdown();
-    
+
     running_ = false;
   }
 
@@ -461,7 +461,7 @@ public:
 
     std::string encoding;
     if (frame->Format == ePvFmtMono8)       encoding = sensor_msgs::image_encodings::MONO8;
-    else if (frame->Format == ePvFmtBayer8) 
+    else if (frame->Format == ePvFmtBayer8)
     {
 #if 1
       encoding = BAYER_ENCODINGS[frame->BayerPattern];
@@ -487,7 +487,7 @@ public:
     uint32_t step = frame->ImageSize / frame->Height;
     return sensor_msgs::fillImage(image, encoding, frame->Height, frame->Width, step, frame->ImageBuffer);
   }
-  
+
   bool processFrame(tPvFrame* frame, sensor_msgs::Image &img, sensor_msgs::CameraInfo &cam_info)
   {
     /// @todo Better trigger timestamp matching
@@ -499,7 +499,7 @@ public:
       /// @todo Match time stamp from frame to ROS time?
       img.header.stamp = cam_info.header.stamp = ros::Time::now();
     }
-    
+
     /// @todo Binning values retrieved here may differ from the ones used to actually
     /// capture the frame! Maybe need to clear queue when changing binning and/or
     /// stuff binning values into context?
@@ -529,7 +529,7 @@ public:
     count_++;
     return true;
   }
-  
+
   void publishImage(tPvFrame* frame)
   {
     if (processFrame(frame, img_, cam_info_))
@@ -555,7 +555,7 @@ public:
   {
     ROS_INFO("New camera info received");
     sensor_msgs::CameraInfo &info = req.camera_info;
-    
+
     // Sanity check: the image dimensions should match the max resolution of the sensor.
     tPvUint32 width, height, dummy;
     PvAttrRangeUint32(cam_->handle(), "Width", &dummy, &width);
@@ -568,7 +568,7 @@ public:
       ROS_ERROR("%s", rsp.status_message.c_str());
       return true;
     }
-    
+
     stop();
 
     std::string cam_name = "prosilica";
@@ -598,7 +598,7 @@ public:
     }
     if (!rsp.success)
       ROS_ERROR("%s", rsp.status_message.c_str());
-    
+
     start();
 
     return true;
@@ -617,7 +617,7 @@ public:
       consecutive_stable_exposures_ = 0;
     }
   }
-  
+
   void normalizeExposure()
   {
     ROS_INFO("Normalizing exposure");
@@ -638,13 +638,13 @@ public:
   /////////////////
   // Diagnostics //
   /////////////////
-  
+
   void runDiagnostics()
   {
     self_test_->checkTest();
     diagnostic_.update();
   }
-  
+
   void freqStatus(diagnostic_updater::DiagnosticStatusWrapper& status)
   {
     double freq = (double)(count_)/diagnostic_.getPeriod();
@@ -661,7 +661,7 @@ public:
     status.add("Images in interval", count_);
     status.add("Desired frequency", desired_freq_);
     status.add("Actual frequency", freq);
-    
+
     count_ = 0;
   }
 
@@ -678,7 +678,7 @@ public:
     frames_completed_acc_.add(completed - frames_completed_total_);
     frames_completed_total_ = completed;
     unsigned long completed_recent = frames_completed_acc_.sum();
-    
+
     frames_dropped_acc_.add(dropped - frames_dropped_total_);
     frames_dropped_total_ = dropped;
     unsigned long dropped_recent = frames_dropped_acc_.sum();
@@ -717,7 +717,7 @@ public:
     packets_received_acc_.add(received - packets_received_total_);
     packets_received_total_ = received;
     unsigned long received_recent = packets_received_acc_.sum();
-    
+
     packets_missed_acc_.add(missed - packets_missed_total_);
     packets_missed_total_ = missed;
     unsigned long missed_recent = packets_missed_acc_.sum();
@@ -739,7 +739,7 @@ public:
     unsigned long data_rate = 0;
     cam_->getAttribute("StreamBytesPerSecond", data_rate);
     unsigned long max_data_rate = cam_->getMaxDataRate();
-    
+
     if (auto_adjust_stream_bytes_per_second_)
     {
       if (max_data_rate < prosilica::Camera::GIGE_MAX_DATA_RATE)
@@ -780,7 +780,7 @@ public:
         cam_->setAttribute("StreamBytesPerSecond", data_rate);
       }
     }
-    
+
     status.add("Recent % Packets Received", recent_ratio * 100.0f);
     status.add("Overall % Packets Received", total_ratio * 100.0f);
     status.add("Received Packets", received);
@@ -890,7 +890,7 @@ public:
 	{
 	  status.summary(2, "Attempted to grab a frame, but received NULL");
 	}
-	
+
     }
     catch (prosilica::ProsilicaException &e) {
       status.summary(2, e.what());

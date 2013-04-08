@@ -1,0 +1,14 @@
+<!--
+Starts a PR2 Prosilica camera in streaming mode.
+This file exists mainly for backwards compatibility.
+-->
+
+<launch>
+
+   <node pkg="prosilica_camera" type="prosilica_node" name="prosilica" output="screen">
+      <param name="ip_address" value="192.168.3.145"/>
+      <param name="exposure_auto_max" value=".03"/>
+      <param name="trigger_mode" value="fixedrate"/>
+   </node>
+
+</launch>

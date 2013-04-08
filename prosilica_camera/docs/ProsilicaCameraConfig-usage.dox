@@ -24,6 +24,7 @@
   <param name="exposure_auto_target" type="int" value="50" />
   <param name="gain_auto_max" type="int" value="24" />
   <param name="gain_auto_target" type="int" value="50" />
+  <param name="fixed_rate" type="double" value="10.0" />
 </node>
 \endverbatim
 

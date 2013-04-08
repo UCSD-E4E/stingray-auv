@@ -1,13 +1,13 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
-* 
+*
 *  Copyright (c) 2008, Willow Garage, Inc.
 *  All rights reserved.
-* 
+*
 *  Redistribution and use in source and binary forms, with or without
 *  modification, are permitted provided that the following conditions
 *  are met:
-* 
+*
 *   * Redistributions of source code must retain the above copyright
 *     notice, this list of conditions and the following disclaimer.
 *   * Redistributions in binary form must reproduce the above
@@ -17,7 +17,7 @@
 *   * Neither the name of the Willow Garage nor the names of its
 *     contributors may be used to endorse or promote products derived
 *     from this software without specific prior written permission.
-* 
+*
 *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -53,7 +53,7 @@ namespace prosilica {
 struct ProsilicaException : public std::runtime_error
 {
   tPvErr error_code;
-  
+
   ProsilicaException(tPvErr code, const char* msg)
     : std::runtime_error(msg), error_code(code)
   {}
@@ -68,10 +68,10 @@ uint64_t getGuid(size_t i); // camera ids
 /// Firmware 1.38 April 7,2010
 enum FrameStartTriggerMode
 {
-  Freerun, 
-  SyncIn1, 
-  SyncIn2, 
-  FixedRate, 
+  Freerun,
+  SyncIn1,
+  SyncIn2,
+  FixedRate,
   Software,
   None
 };
@@ -95,7 +95,7 @@ class Camera
 {
 public:
   static const size_t DEFAULT_BUFFER_SIZE = 4;
-  
+
   Camera(unsigned long guid, size_t bufferSize = DEFAULT_BUFFER_SIZE);
   Camera(const char* ip_address, size_t bufferSize = DEFAULT_BUFFER_SIZE);
 
@@ -129,19 +129,19 @@ public:
   void getAttribute(const std::string &name, tPvUint32 &value);
   void getAttribute(const std::string &name, tPvFloat32 &value);
   void getAttribute(const std::string &name, std::string &value);
-  
+
   void setAttributeEnum(const std::string &name, const std::string &value);
   void setAttribute(const std::string &name, tPvUint32 value);
   void setAttribute(const std::string &name, tPvFloat32 value);
   void setAttribute(const std::string &name, const std::string &value);
 
   void runCommand(const std::string& name);
-  
+
   unsigned long guid();
 
   unsigned long getMaxDataRate();
   static const unsigned long GIGE_MAX_DATA_RATE = 115000000;
-  
+
   //! Data must have size <= USER_MEMORY_SIZE bytes.
   static const size_t USER_MEMORY_SIZE = 512;
   void writeUserMemory(const char* data, size_t size);
@@ -149,7 +149,7 @@ public:
 
   //! Get raw PvApi camera handle.
   tPvHandle handle();
-  
+
 private:
   tPvHandle handle_; // handle to open camera
   tPvFrame* frames_; // array of frame buffers
@@ -161,7 +161,7 @@ private:
   boost::mutex frameMutex_;
 
   void setup();
-  
+
   static void frameDone(tPvFrame* frame);
 };
 
