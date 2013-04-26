@@ -14,8 +14,14 @@
   <depend package="std_msgs"/>
   <depend package="tf"/>
   
+  <!-- SEPERATING OUT SENSORS
   <depend package="microstrain"/>
   <depend package="os5000"/>
+  -->
+
   <depend package="pid"/>
+
+  <!-- SEPERATING OUT SENSORS
   <depend package="planner"/>
+  -->
 </package>

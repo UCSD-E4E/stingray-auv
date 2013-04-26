@@ -55,7 +55,10 @@
 // Custom messages.
 #include "nav/ControlInputs.h"
 #include "pid/PID.h"
+
+ /* SEPERATING OUT SENSORS
 #include "planner/TargetStates.h"
+*/
 
 // Dynamic reconfigure.
 #include <dynamic_reconfigure/server.h>
@@ -84,6 +87,8 @@ public:
     //! Publisher for control inputs
     void publishControlInputs(ros::Publisher *pub_control_inputs);
 
+    /* SEPERATING OUT SENSORS
+
     //! Callback function for compass data
     void compassCallback(const sensor_msgs::Imu::ConstPtr& msg);
 
@@ -92,6 +97,7 @@ public:
 
     //! Callback function for Target States
     void targetStatesCallback(const planner::TargetStates::ConstPtr& msg);
+    */
 
     //! Callback function for dynamic configuration of gains
     void configCallback(nav::navParamsConfig& config, uint32_t level);

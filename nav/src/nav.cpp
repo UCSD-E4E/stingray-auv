@@ -115,6 +115,7 @@ void Nav::publishControlInputs(ros::Publisher *pub_control_inputs)
  * Callback for IMU data.
  *----------------------------------------------------------------------------*/
 
+/* SEPERATING OUT SENSORS
 void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     // Convert quaternion to RPY.
@@ -124,13 +125,14 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
-
+*/
 
 /*------------------------------------------------------------------------------
  * compassCallback()
  * Callback for compass data.
  *----------------------------------------------------------------------------*/
 
+/* SEPERATING OUT SENSORS
 void Nav::compassCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     // Convert quaternion to RPY.
@@ -139,13 +141,14 @@ void Nav::compassCallback(const sensor_msgs::Imu::ConstPtr& msg)
     tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
     ROS_DEBUG("OS5000 RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
 } // end compassCallback()
-
+*/
 
 /*------------------------------------------------------------------------------
  * targetStatesCallback()
  * Callback for targets.
  *----------------------------------------------------------------------------*/
 
+/* SEPERATING OUT SENSORS
 void Nav::targetStatesCallback(const planner::TargetStates::ConstPtr& msg)
 {
     target_roll  = msg->target_roll;
@@ -156,7 +159,7 @@ void Nav::targetStatesCallback(const planner::TargetStates::ConstPtr& msg)
 
     ROS_DEBUG("Nav: Target States Received target roll = %f , target pitch = %f , target yaw = %f , target depth = %f , target surge = %f", target_roll, target_pitch, target_yaw, target_depth, target_surge);
 } // end targetStatesCallback()
-
+*/
 
 /*------------------------------------------------------------------------------
  * configCallback()
@@ -260,9 +263,11 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(rate);
 
     // Set up ROS subscribers and clients so that data can be found.
+    /* SEPERATING OUT SENSORS
     ros::Subscriber compass_sub = n.subscribe("os5000_data", 1000, &Nav::compassCallback, nav);
     ros::Subscriber microstrain_sub = n.subscribe("mstrain_data", 1000, &Nav::microstrainCallback, nav);
     ros::Subscriber target_states_sub = n.subscribe("targetStates", 1000, &Nav::targetStatesCallback, nav);
+    */
     ros::ServiceClient pid_client = n.serviceClient<pid::PID>("PID");
     pid::PID pid_srv;
 
