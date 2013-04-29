@@ -120,7 +120,7 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     // Convert quaternion to RPY.
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
-    tf::Matrix3x3(q).getEulerYPR(roll, pitch, yaw);
+    tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
@@ -134,10 +134,12 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 void Nav::compassCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     // Convert quaternion to RPY.
+    /* TODO: get depth from compass
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
     tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
     ROS_DEBUG("OS5000 RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
+    */
 } // end compassCallback()
 
 
