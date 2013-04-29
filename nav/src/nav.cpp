@@ -121,7 +121,7 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     // Convert quaternion to RPY.
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
-    tf::Matrix3x3(q).getEulerYPR(roll, pitch, yaw);
+    tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
@@ -168,7 +168,8 @@ void Nav::targetStatesCallback(const planner::TargetStates::ConstPtr& msg)
 
 void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
 {
-    ROS_INFO("Reconfiguring Roll to : (P, I, D) = (%f %f %f)", config.gain_roll_p, config.gain_roll_i, config.gain_roll_d);
+    ROS_INFO("Reconfiguring Roll to : (P, I, D) = (%f %f %f) Target = %f", config.gain_roll_p, config.gain_roll_i, config.gain_roll_d, config.roll);
+    roll = config.roll;
     gain_roll_p = config.gain_roll_p;
     gain_roll_i = config.gain_roll_i;
     gain_roll_d = config.gain_roll_d;
@@ -228,6 +229,7 @@ int main(int argc, char **argv)
 
     // Initialize node parameters.
     private_node_handle_.param("rate", rate, int(15));
+    private_node_handle_.param("roll",   nav->roll, double(0.));
     private_node_handle_.param("gain_roll_p",   nav->gain_roll_p, double(1.));
     private_node_handle_.param("gain_roll_i",   nav->gain_roll_i, double(0.));
     private_node_handle_.param("gain_roll_d",   nav->gain_roll_d, double(0.));
@@ -513,7 +515,8 @@ int main(int argc, char **argv)
         last_time = current_time;
 
         ros::spinOnce();
-        loop_rate.sleep();
+        //loop_rate.sleep();
+        ros::Duration(2).sleep(); // sleep for () seconds
     }
 
     return 0;
