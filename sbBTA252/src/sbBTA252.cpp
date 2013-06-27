@@ -92,6 +92,16 @@ void SBBTA252::setup()
   // Check if the thruster serial port was opened correctly.
   if (Serial::fd > 0)
   {
+  
+  	/*
+  	ROS_INFO("START SENDING");
+  
+  	for (int k = 0; k < 256; k++)
+  		sendSpeedCommand(k, 50);
+  		
+  	ROS_INFO("END SENDING");
+  	*/
+  	
     // Setup each thruster.
     for (int i = 0; i < 5; i++)
     {
@@ -210,10 +220,12 @@ void SBBTA252::configCallback(sbBTA252::sbBTA252ParamsConfig& config, uint32_t l
   new_addr     = config.new_addr;
   speed_perc   = config.speed_perc;
   get_status   = config.get_status;
+  
+  depth_frequency = config.depth_frequency;
 
   // Check to see if we should attempt to reconnect to the thrusters.
   if (config.reconnect)
-  {
+  {  
     // Use the new thruster settings to reconnect.
     setup();
     ROS_INFO("Using new settings to reconnect to thrusters. Got fd = %d", fd);
@@ -438,6 +450,11 @@ int main(int argc, char **argv)
   }
   
   int loopCount = 0;
+  float savedDepth = thruster->u_depth;
+  
+  // GABE: scale radians to motor speeds
+  float yawScale = 1; // 80 / (2 * M_PI);
+  float rollPitchScale = 1; //80 / M_PI;
   
   // Main loop.thruster
   while (n.ok())
@@ -467,29 +484,35 @@ int main(int argc, char **argv)
       }
       else
       {
-        // Not doing manual commands so use the planner thrust information
+        // Not doing manual commands so use the planner thrust 
         
-        // Send the Pitch command
-        thruster->sendSpeedCommand(thruster->t_pitch, thruster->u_pitch);
-        
-        if ( loopCount == 5)
+        if ( loopCount >= thruster->depth_frequency)
         {
-          // Send the Depth commands
+          // OLD: Send the Depth commands
+          /*
           thruster->sendSpeedCommand(thruster->t_left_roll, thruster->u_depth);
           thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_depth);
+          */
+          
+          // GS: save current depth
+          savedDepth = thruster->u_depth;
           loopCount = 0;
         }
-        else
-        {
-          // Send the Roll commands
-          thruster->sendSpeedCommand(thruster->t_left_roll, thruster->u_roll);
-          thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_roll * -1);
-          loopCount++;
-        }
+        
+        float negSavedDepth = savedDepth * -1;
+        
+        // Send the Pitch command
+        thruster->sendSpeedCommand(thruster->t_pitch, (thruster->u_pitch * -1) + (negSavedDepth / 2));
+
+
+        // Send the Roll commands
+        thruster->sendSpeedCommand(thruster->t_left_roll, (thruster->u_roll * -1) + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_roll + negSavedDepth);
+        loopCount++;
         
         // Send the Yaw commands
-        thruster->sendSpeedCommand(thruster->t_left_yaw, thruster->u_yaw);
-        thruster->sendSpeedCommand(thruster->t_right_yaw, thruster->u_yaw * -1);
+        thruster->sendSpeedCommand(thruster->t_left_yaw, thruster->u_yaw * yawScale);
+        thruster->sendSpeedCommand(thruster->t_right_yaw, thruster->u_yaw * -1 * yawScale);
       }
     }
 
@@ -745,8 +768,8 @@ char SBBTA252::getSpeed(int bit, int speed)
   // Check validity of thruster address
   if (speed < -100 || speed > 100)
   {
-    ROS_WARN("Speed %d is out of range.", speed);
-    return -1;
+    ROS_WARN("Speed %d is out of range. Sending 100.", speed);
+    speed = 100;
   }
   
   int dec;
@@ -879,3 +902,4 @@ bool SBBTA252::parseStatus()
     return true;
   }
 } // end parseStatus()
+

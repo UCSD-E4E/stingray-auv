@@ -26,7 +26,7 @@ Runs all the Seabotix BTA252 thrusters.
         />
         <param
             name="reconnect"
-            value="false"
+            value="true"
         />
     </node>
 </launch>

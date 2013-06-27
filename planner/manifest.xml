@@ -14,7 +14,7 @@
   <depend package="std_msgs"/>
 
   <depend package="mission_controller"/>
-  <depend package="microstrain"/>
+  <!--depend package="microstrain"/-->
   <depend package="os5000"/>
   <depend package="state_estimator"/>
 </package>

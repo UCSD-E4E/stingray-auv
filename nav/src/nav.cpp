@@ -88,6 +88,8 @@ void Nav::initStates()
     dt_yaw = 0.;
     dt_depth = 0.;
     dt_surge = 0.;
+    
+    roll_upsidedown = false;
 } //end initStates()
 
 
@@ -120,9 +122,26 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     // Convert quaternion to RPY.
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
-    tf::Matrix3x3(q).getEulerYPR(roll, pitch, yaw);
-    ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
-    ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
+    tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
+    
+    
+    // Gabe
+    // Correction of data code. Take roll and flip it
+    if (roll_upsidedown)
+    {
+		if (roll > 0)
+		{
+			roll -= M_PI;
+		}
+		else
+		{
+			roll += M_PI;
+		}
+	}
+    
+    ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll, pitch, yaw);
+    //ROS_DEBUG_THROTTLE(15, "Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
+    //ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
 
 
@@ -157,7 +176,12 @@ void Nav::targetStatesCallback(const planner::TargetStates::ConstPtr& msg)
     ROS_DEBUG("Nav: Target States Received target roll = %f , target pitch = %f , target yaw = %f , target depth = %f , target surge = %f", target_roll, target_pitch, target_yaw, target_depth, target_surge);
 } // end targetStatesCallback()
 
+void Nav::compassDepthCallback( const os5000::DepthMessage::ConstPtr& msg)
+{
+	depth = msg->depth;
+	ROS_DEBUG("DEPTH: %lf", depth);
 
+}
 /*------------------------------------------------------------------------------
  * configCallback()
  * Callback function for dynamic reconfigure server.
@@ -199,6 +223,8 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_surge_d = config.gain_surge_d;
     min_int_surge = config.min_int_surge;
     max_int_surge = config.max_int_surge;
+    
+    roll_upsidedown = config.roll_upsidedown;
 } // end configCallback()
 
 
@@ -225,15 +251,15 @@ int main(int argc, char **argv)
 
     // Initialize node parameters.
     private_node_handle_.param("rate", rate, int(15));
-    private_node_handle_.param("gain_roll_p",   nav->gain_roll_p, double(1.));
+    private_node_handle_.param("gain_roll_p",   nav->gain_roll_p, double(6.));
     private_node_handle_.param("gain_roll_i",   nav->gain_roll_i, double(0.));
     private_node_handle_.param("gain_roll_d",   nav->gain_roll_d, double(0.));
-    private_node_handle_.param("gain_pitch_p",  nav->gain_pitch_p, double(1.));
+    private_node_handle_.param("gain_pitch_p",  nav->gain_pitch_p, double(6.));
     private_node_handle_.param("gain_pitch_i",  nav->gain_pitch_i, double(0.));
     private_node_handle_.param("gain_pitch_d",  nav->gain_pitch_d, double(0.));
-    private_node_handle_.param("gain_yaw_p",    nav->gain_yaw_p, double(0.01));
+    private_node_handle_.param("gain_yaw_p",    nav->gain_yaw_p, double(0.5));
     private_node_handle_.param("gain_yaw_i",    nav->gain_yaw_i, double(0.));
-    private_node_handle_.param("gain_yaw_d",    nav->gain_yaw_d, double(0.05));
+    private_node_handle_.param("gain_yaw_d",    nav->gain_yaw_d, double(0.0));
     private_node_handle_.param("gain_depth_p",  nav->gain_depth_p, double(1.));
     private_node_handle_.param("gain_depth_i",  nav->gain_depth_i, double(0.));
     private_node_handle_.param("gain_depth_d",  nav->gain_depth_d, double(0.));
@@ -260,7 +286,10 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(rate);
 
     // Set up ROS subscribers and clients so that data can be found.
-    ros::Subscriber compass_sub = n.subscribe("os5000_data", 1000, &Nav::compassCallback, nav);
+    
+    // !! Removed subscriptions to compass and planner nodes
+    // ros::Subscriber compass_sub = n.subscribe("os5000_data", 1000, &Nav::compassCallback, nav);
+       ros::Subscriber compass_depth = n.subscribe("depthMessage", 1000, &Nav::compassDepthCallback, nav);
     ros::Subscriber microstrain_sub = n.subscribe("mstrain_data", 1000, &Nav::microstrainCallback, nav);
     ros::Subscriber target_states_sub = n.subscribe("targetStates", 1000, &Nav::targetStatesCallback, nav);
     ros::ServiceClient pid_client = n.serviceClient<pid::PID>("PID");
@@ -508,7 +537,9 @@ int main(int argc, char **argv)
         last_time = current_time;
 
         ros::spinOnce();
+        
         loop_rate.sleep();
+        //ros::Duration(2).sleep();
     }
 
     return 0;

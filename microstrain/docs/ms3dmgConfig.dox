@@ -1,8 +1,0 @@
-\subsubsection parameters ROS parameters
-
-Reads and maintains the following parameters on the ROS server
-
-- \b "~port" : \b [str] The port the IMU is plugged into. min: , default: /dev/ttyUSB0, max: 
-- \b "~baud" : \b [int] The baud rate of the IMU. min: 2400, default: 115200, max: 115200
-- \b "~reconnect" : \b [bool] Whether to attempt to reconnect to IMU. min: False, default: False, max: True
-

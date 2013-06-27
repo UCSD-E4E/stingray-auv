@@ -1,0 +1,14 @@
+\subsubsection usage Usage
+\verbatim
+<node name="planner" pkg="planner" type="planner">
+  <param name="target_surge" type="double" value="1.0" />
+  <param name="target_depth" type="double" value="0.0" />
+  <param name="target_roll" type="double" value="0.0" />
+  <param name="target_pitch" type="double" value="0.0" />
+  <param name="target_yaw" type="double" value="0.0" />
+  <param name="target_lat" type="double" value="0.0" />
+  <param name="target_lon" type="double" value="0.0" />
+  <param name="dynamic_reconfigure_enable" type="bool" value="False" />
+</node>
+\endverbatim
+

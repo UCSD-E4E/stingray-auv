@@ -12,13 +12,17 @@
       <param name="reconnect"      value="false"/>
   </node>
 
-  <node pkg="microstrain" type="ms3dmg" name="microstrain">
-      <param name="baud"           value="115200"/>
-      <param name="port"           value="/dev/ttyUSB1"/>
-      <param name="pub_topic_name" value="mstrain_data"/>
-      <param name="rate"           value="50"/>
-      <param name="use_gyro_stab"  value="true"/>
-  </node>
+  <!-- imu -->
+    <node pkg="microstrain_3dmgx2_imu" type="imu_node" name="microstrain_3dmgx2_node" output="screen">
+      <param name="time_offset" value="-0.040" />
+      <param name="port"  type="string" value="/dev/ttyACM0" />
+      <param name="autostart" type="bool" value="true" />
+      <param name="frameid"  type="string" value="imu" />
+      <param name="autocalibrate" type="bool" value="true" />
+      <param name="angular_velocity_stdev" type="double" value="0.00017" />
+      <remap from="/imu/data" to="/mstrain_data"/>
+    </node>
+
 
   <node pkg="pid" type="pidserver" name="pid"/>
 
