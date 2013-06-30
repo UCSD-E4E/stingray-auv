@@ -1,4 +1,7 @@
 <launch>
+
+  <include file="$(find stingray_start)/stingray.machine" />
+
   <node pkg="rxtools" type="rxconsole" name="rxconsole"/>
 
   <node pkg="sbBTA252" type="sbBTA252" name="thrusters"/>

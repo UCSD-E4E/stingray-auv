@@ -1,0 +1,8 @@
+<launch>
+
+  <!-- Configuration args -->
+  <arg name="stingray_ip" default="192.168.3.233" />
+
+  <machine name="stingray" address="$(arg stingray_ip)" env-loader="/opt/ros/fuerte/env.sh" user="uwstereo" />
+
+</launch>

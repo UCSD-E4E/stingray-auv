@@ -134,14 +134,18 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 			roll -= M_PI;
 		}
 		else
-		{
+	{
 			roll += M_PI;
 		}
+	}
 	}
     
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll, pitch, yaw);
     //ROS_DEBUG_THROTTLE(15, "Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     //ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
+=======
+    ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
+    ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
 
 
@@ -153,10 +157,12 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 void Nav::compassCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     // Convert quaternion to RPY.
+    /* TODO: get depth from compass
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
     tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
     ROS_DEBUG("OS5000 RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
+    */
 } // end compassCallback()
 
 
@@ -472,13 +478,6 @@ int main(int argc, char **argv)
 
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_depth_error;
-        pid_srv.request.previous_integrator_val = nav->prev_depth_int;
-        nav->dt_depth = dt;
-        pid_srv.request.dt = nav->dt_depth;
-        pid_srv.request.gain_p = nav->gain_depth_p;
-        pid_srv.request.gain_i = nav->gain_depth_i;
-        pid_srv.request.gain_d = nav->gain_depth_d;
-        pid_srv.request.integral_term_min = nav->min_int_depth;
         pid_srv.request.integral_term_max = nav->max_int_depth;
 
         ROS_DEBUG("Depth = %f", nav->depth);
