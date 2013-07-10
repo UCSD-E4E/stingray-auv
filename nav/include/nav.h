@@ -53,6 +53,7 @@
 #include <tf/LinearMath/Quaternion.h>
 
 // Custom messages.
+#include "os5000/DepthMessage.h"
 #include "nav/ControlInputs.h"
 #include "pid/PID.h"
 #include "planner/TargetStates.h"
@@ -87,6 +88,8 @@ public:
     //! Callback function for compass data
     void compassCallback(const sensor_msgs::Imu::ConstPtr& msg);
 
+	void compassDepthCallback(const os5000::DepthMessage::ConstPtr& msg);
+	
     //! Callback function for compass data
     void microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg);
 
@@ -97,6 +100,8 @@ public:
     void configCallback(nav::navParamsConfig& config, uint32_t level);
 
     // States.
+    bool roll_upsidedown;
+    
     //! Roll state. In radians (-pi,pi], measured around longitudinal axis, positive is left wing up, negative is left wing down.
     double roll;
     //! Pitch state. In radians (-pi,pi], measured around lateral axis, positive is nose up, negative is nose down.

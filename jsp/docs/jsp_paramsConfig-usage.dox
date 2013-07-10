@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="jsp" pkg="jsp" type="jsp">
+  <param name="x" type="double" value="0.0" />
+  <param name="y" type="double" value="0.0" />
+  <param name="z" type="double" value="0.0" />
+  <param name="roll" type="double" value="0.0" />
+  <param name="pitch" type="double" value="0.0" />
+  <param name="yaw" type="double" value="0.0" />
+</node>
+\endverbatim
+

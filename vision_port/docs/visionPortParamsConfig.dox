@@ -1,0 +1,13 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~boost_wanted" : \b [int] If boost is wanted. min: 0, default: 0, max: 1
+- \b "~image_to_view" : \b [int] The task to perform. min: 0, default: 1, max: 7
+- \b "~h_low" : \b [double] H low. min: 0.0, default: 100.0, max: 255.0
+- \b "~h_high" : \b [double] H high. min: 0.0, default: 200.0, max: 255.0
+- \b "~s_low" : \b [double] S low. min: 0.0, default: 100.0, max: 255.0
+- \b "~s_high" : \b [double] S high. min: 0.0, default: 200.0, max: 255.0
+- \b "~v_low" : \b [double] V low. min: 0.0, default: 100.0, max: 255.0
+- \b "~v_high" : \b [double] V high. min: 0.0, default: 200.0, max: 255.0
+

@@ -272,10 +272,10 @@ int main(int argc, char **argv)
     ros::Rate r(rate);
 
     // Set up ROS subscribers so that data can be found.
-    ros::Subscriber state_estimator_sub = n.subscribe("state", 1, &Planner::stateEstimatorCallback, planner);
-    ros::Subscriber waypoint_sub = n.subscribe("targetWaypoints", 1, &Planner::followPathCallback, planner);
-    ros::Subscriber compass_sub = n.subscribe("compassData", 1, &Planner::compassCallback, planner);
-    ros::Subscriber microstrain_sub = n.subscribe("mstrain_data", 1, &Planner::microstrainCallback, planner);
+    //ros::Subscriber state_estimator_sub = n.subscribe("state", 1, &Planner::stateEstimatorCallback, planner);
+    //ros::Subscriber waypoint_sub = n.subscribe("targetWaypoints", 1, &Planner::followPathCallback, planner);
+    //ros::Subscriber compass_sub = n.subscribe("compassData", 1, &Planner::compassCallback, planner);
+    //ros::Subscriber microstrain_sub = n.subscribe("mstrain_data", 1, &Planner::microstrainCallback, planner);
 
     // Set up ROS publisher for target states
     ros::Publisher pub_target_states = n.advertise<planner::TargetStates>("targetStates", 1000);

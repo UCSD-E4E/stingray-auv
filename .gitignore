@@ -6,3 +6,4 @@ msg_gen/*
 src_gen/*
 *.o
 *.pyc
+*.swp

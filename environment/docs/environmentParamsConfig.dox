@@ -1,0 +1,11 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~disturbanceRoll" : \b [double] Roll Disturbance min: -100.0, default: 0.0, max: 100.0
+- \b "~disturbancePitch" : \b [double] Pitch Disturbance min: -100.0, default: 0.0, max: 100.0
+- \b "~disturbanceYaw" : \b [double] Yaw Disturbance min: -100.0, default: 0.0, max: 100.0
+- \b "~disturbanceDepth" : \b [double] Depth Disturbance min: -100.0, default: 0.0, max: 100.0
+- \b "~disturbanceSpeed" : \b [double] Speed Disturbance min: -100.0, default: 0.0, max: 100.0
+- \b "~disturbanceSway" : \b [double] Sway Disturbance min: -100.0, default: 0.0, max: 100.0
+

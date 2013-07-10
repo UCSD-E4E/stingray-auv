@@ -12,6 +12,6 @@
   <depend package="sensor_msgs"/>
   <depend package="tf"/>
   
-  <depend package="microstrain"/>
+  <!--depend package="microstrain"/-->
   <depend package="os5000"/>
 </package>

@@ -1,0 +1,21 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~port" : \b [str] The port the thruster is plugged into. min: , default: /dev/ttyS0, max: 
+- \b "~baud" : \b [int] The baud rate of the thruster. min: 2400, default: 115200, max: 115200
+- \b "~t_left_yaw" : \b [int] The address of the left yaw thruster. min: 0, default: 1, max: 255
+- \b "~t_right_yaw" : \b [int] The address of the right yaw thruster. min: 0, default: 2, max: 255
+- \b "~t_left_roll" : \b [int] The address of the left roll thruster. min: 0, default: 4, max: 255
+- \b "~t_right_roll" : \b [int] The address of the right roll thruster. min: 0, default: 5, max: 255
+- \b "~t_pitch" : \b [int] The address of the pitch thruster. min: 0, default: 3, max: 255
+- \b "~init_time" : \b [int] The amount of time to connect to thruster. min: 1, default: 1, max: 10
+- \b "~manual" : \b [bool] Should we manually control the thrusters. min: False, default: False, max: True
+- \b "~thrust_addr" : \b [int] Thruster address we are talking to. min: 0, default: 1, max: 255
+- \b "~reconnect" : \b [bool] Whether to attempt to reconnect to thruster. min: False, default: False, max: True
+- \b "~change_addr" : \b [bool] Flag to change the address. min: False, default: False, max: True
+- \b "~new_addr" : \b [int] New address to change to. min: 1, default: 1, max: 5
+- \b "~speed_perc" : \b [int] The speed of the thruster in percent. min: -100, default: 0, max: 100
+- \b "~get_status" : \b [bool] Get the status of this thruster. min: False, default: False, max: True
+- \b "~depth_frequency" : \b [int] Frequency to update depth vs roll. min: 0, default: 5, max: 10
+
