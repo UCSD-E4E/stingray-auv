@@ -88,7 +88,7 @@ void Nav::initStates()
     dt_yaw = 0.;
     dt_depth = 0.;
     dt_surge = 0.;
-    
+
     roll_upsidedown = false;
 } //end initStates()
 
@@ -123,8 +123,8 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
     tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
-    
-    
+
+
     // Gabe
     // Correction of data code. Take roll and flip it
     if (roll_upsidedown)
@@ -139,7 +139,7 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 		}
 	}
 	}
-    
+
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll, pitch, yaw);
     //ROS_DEBUG_THROTTLE(15, "Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     //ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
@@ -229,7 +229,7 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_surge_d = config.gain_surge_d;
     min_int_surge = config.min_int_surge;
     max_int_surge = config.max_int_surge;
-    
+
     roll_upsidedown = config.roll_upsidedown;
 } // end configCallback()
 
@@ -256,7 +256,7 @@ int main(int argc, char **argv)
     Nav *nav = new Nav();
 
     // Initialize node parameters.
-    private_node_handle_.param("rate", rate, int(15));
+    private_node_handle_.param("rate", rate, int(100));
     private_node_handle_.param("gain_roll_p",   nav->gain_roll_p, double(6.));
     private_node_handle_.param("gain_roll_i",   nav->gain_roll_i, double(0.));
     private_node_handle_.param("gain_roll_d",   nav->gain_roll_d, double(0.));
@@ -292,7 +292,7 @@ int main(int argc, char **argv)
     ros::Rate loop_rate(rate);
 
     // Set up ROS subscribers and clients so that data can be found.
-    
+
     // !! Removed subscriptions to compass and planner nodes
     // ros::Subscriber compass_sub = n.subscribe("os5000_data", 1000, &Nav::compassCallback, nav);
        ros::Subscriber compass_depth = n.subscribe("depthMessage", 1000, &Nav::compassDepthCallback, nav);
@@ -536,7 +536,7 @@ int main(int argc, char **argv)
         last_time = current_time;
 
         ros::spinOnce();
-        
+
         loop_rate.sleep();
         //ros::Duration(2).sleep();
     }
