@@ -3,11 +3,11 @@
 <node name="sbBTA252" pkg="sbBTA252" type="sbBTA252">
   <param name="port" type="str" value="/dev/ttyS0" />
   <param name="baud" type="int" value="115200" />
-  <param name="t_left_yaw" type="int" value="1" />
+  <param name="t_left_yaw" type="int" value="3" />
   <param name="t_right_yaw" type="int" value="2" />
   <param name="t_left_roll" type="int" value="4" />
-  <param name="t_right_roll" type="int" value="5" />
-  <param name="t_pitch" type="int" value="3" />
+  <param name="t_right_roll" type="int" value="1" />
+  <param name="t_pitch" type="int" value="5" />
   <param name="init_time" type="int" value="1" />
   <param name="manual" type="bool" value="False" />
   <param name="thrust_addr" type="int" value="1" />

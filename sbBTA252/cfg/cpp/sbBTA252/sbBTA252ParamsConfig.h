@@ -499,7 +499,7 @@ sbBTA252ParamsConfig::GroupDescription<sbBTA252ParamsConfig::DEFAULT, sbBTA252Pa
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.t_left_yaw = 255;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.t_left_yaw = 1;
+      __default__.t_left_yaw = 3;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("t_left_yaw", "int", 0, "The address of the left yaw thruster.", "", &sbBTA252ParamsConfig::t_left_yaw)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -529,7 +529,7 @@ sbBTA252ParamsConfig::GroupDescription<sbBTA252ParamsConfig::DEFAULT, sbBTA252Pa
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.t_right_roll = 255;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.t_right_roll = 5;
+      __default__.t_right_roll = 1;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("t_right_roll", "int", 0, "The address of the right roll thruster.", "", &sbBTA252ParamsConfig::t_right_roll)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -539,7 +539,7 @@ sbBTA252ParamsConfig::GroupDescription<sbBTA252ParamsConfig::DEFAULT, sbBTA252Pa
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.t_pitch = 255;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.t_pitch = 3;
+      __default__.t_pitch = 5;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("t_pitch", "int", 0, "The address of the pitch thruster.", "", &sbBTA252ParamsConfig::t_pitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

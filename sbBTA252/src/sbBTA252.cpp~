@@ -502,7 +502,7 @@ int main(int argc, char **argv)
         float negSavedDepth = savedDepth * -1;
         
         // Send the Pitch command
-        thruster->sendSpeedCommand(thruster->t_pitch, (thruster->u_pitch * -1) + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_pitch, (thruster->u_pitch * -1) + (negSavedDepth / 2));
 
 
         // Send the Roll commands
@@ -768,8 +768,8 @@ char SBBTA252::getSpeed(int bit, int speed)
   // Check validity of thruster address
   if (speed < -100 || speed > 100)
   {
-    ROS_WARN("Speed %d is out of range. Sending 100.", speed);
-    speed = 100;
+    ROS_WARN("Speed %d is out of range. Sending +/- 100.", speed);
+    speed = ((speed>0)-(speed<0))*100;
   }
   
   int dec;

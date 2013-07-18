@@ -62,8 +62,7 @@ bool computePIDOut(pid::PID::Request& req, pid::PID::Response& res)
 
     // Compute the output.
     //! \todo Still need to add anti-windup feature.
-    res.u = req.gain_p * error + req.gain_i * integral_term + req.gain_d * (req.alpha*(error - req.previous_error) / req.dt+(1-req.alpha)*req.previous_derivative_val);
-
+    res.u = req.gain_p * error + req.gain_i * integral_term + req.gain_d * (error - req.previous_error) / req.dt;
     res.current_integrator_val = integral_term;
     res.current_error = error;
 
