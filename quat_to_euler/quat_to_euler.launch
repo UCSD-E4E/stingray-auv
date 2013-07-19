@@ -1,0 +1,11 @@
+<launch>
+
+<node pkg="quat_to_euler" type="quat_to_euler.py" name="imu_euler_angles">
+    <remap from="imu"   to="/mstrain_data"/>
+    <remap from="euler" to="microstrain/euler"/>
+</node>
+
+<node pkg="rxtools" type="rxplot" name="plot_RPY"
+      args="/microstrain/euler/roll,/targetStates/target_roll  /microstrain/euler/pitch,/targetStates/target_pitch /microstrain/euler/yaw,/targetStates/target_yaw"/>
+
+</launch>

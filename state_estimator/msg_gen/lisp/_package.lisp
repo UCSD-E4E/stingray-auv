@@ -1,6 +1,20 @@
 (cl:defpackage state_estimator-msg
   (:use )
   (:export
+<<<<<<< HEAD
+   "<LOADTORQUE>"
+   "LOADTORQUE"
+   "<STATE>"
+   "STATE"
+   "<SIMDVLDATA>"
+   "SIMDVLDATA"
+   "<PRIMEPOWERSTARTSTOP>"
+   "PRIMEPOWERSTARTSTOP"
+   "<STATEPREDICTION>"
+   "STATEPREDICTION"
+   "<CONTROLINPUTS>"
+   "CONTROLINPUTS"
+=======
    "<STATEPREDICTION>"
    "STATEPREDICTION"
    "<SIMDVLDATA>"
@@ -13,5 +27,6 @@
    "LOADTORQUE"
    "<PRIMEPOWERSTARTSTOP>"
    "PRIMEPOWERSTARTSTOP"
+>>>>>>> ddc2ab950663a2edcc5d16708bce3684d5e6b40a
   ))
 

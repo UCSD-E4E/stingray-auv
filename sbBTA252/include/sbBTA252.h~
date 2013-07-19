@@ -133,6 +133,8 @@ public:
   /// !!!!!!!!!!!!!!!!!!!!!!!!!!
   /// BEGIN GUI CONFIG VALUES !!
   /// !!!!!!!!!!!!!!!!!!!!!!!!!!
+  
+  int depth_frequency;
 
   //! The address of the left yaw thruster.
   int t_left_yaw;
