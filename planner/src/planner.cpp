@@ -92,6 +92,7 @@ void Planner::initStates()
 void Planner::publishTargetStates(ros::Publisher *pubTargetStates)
 {
     planner::TargetStates msg;
+    msg.header.stamp = ros::Time::now();
 
     msg.target_roll  = target_roll;
     msg.target_pitch = target_pitch;

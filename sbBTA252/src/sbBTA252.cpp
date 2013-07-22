@@ -206,11 +206,11 @@ void SBBTA252::publishMessage(ros::Publisher *pub_thruster_data)
 void SBBTA252::configCallback(sbBTA252::sbBTA252ParamsConfig& config, uint32_t level)
 {
   // Set class variables to new values.
-roll_freq = config.port.roll_update;
-pitch_freq = config.port.pitch_update;
-yaw_freq = config.port.yaw_update;
-depth_freq = config.port.depth_update;
-surge_freq = config.port.surge_update;
+  roll_freq = config.port.roll_update;
+  pitch_freq = config.port.pitch_update;
+  yaw_freq = config.port.yaw_update;
+  depth_freq = config.port.depth_update;
+  surge_freq = config.port.surge_update;
   portname     = config.port.c_str();
   baud         = config.baud;
   t_left_yaw   = config.t_left_yaw;
@@ -480,12 +480,13 @@ int main(int argc, char **argv)
           thruster->sendChangeAddressCommand(thruster->thrust_addr, thruster->new_addr);
         }
         
-        thruster->sendSpeedCommand(1, thruster->speed_perc);
+        thruster->sendSpeedCommand(thruster->thrust_addr, thruster->speed_perc);
+        /*
         thruster->sendSpeedCommand(2, thruster->speed_perc);
         thruster->sendSpeedCommand(3, thruster->speed_perc);
         thruster->sendSpeedCommand(4, thruster->speed_perc);
         thruster->sendSpeedCommand(5, thruster->speed_perc);
-        
+        */
         if (thruster->get_status)
         {
           thruster->sendReadCommand(thruster->thrust_addr);
@@ -534,8 +535,8 @@ if ( loopCount % thruster->surge_freq == 0)
 
 
         // Send the Roll commands
-        thruster->sendSpeedCommand(thruster->t_left_roll, (thruster->u_roll * -1) + negSavedDepth);
-        thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_roll + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_left_roll, (thruster->u_roll ) + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_right_roll, (thruster->u_roll*-1) + negSavedDepth);
         loopCount++;
         
         // Send the Yaw commands
@@ -796,8 +797,8 @@ char SBBTA252::getSpeed(int bit, int speed)
   // Check validity of thruster address
   if (speed < -100 || speed > 100)
   {
-    ROS_WARN("Speed %d is out of range. Sending 100.", speed);
-    speed = 100;
+    ROS_WARN("Speed %d is out of range. Sending +/- 100.", speed);
+    speed = ((speed>0)-(speed<0))*100;
   }
   
   int dec;
@@ -807,11 +808,11 @@ char SBBTA252::getSpeed(int bit, int speed)
   }
   else if (speed > 0)
   {
-    dec = speed + 130;
+    dec = speed + 128;
   }
   else if (speed < 0)
   {
-    dec = speed + 125;
+    dec = speed + 127;
   }
   
   if (bit == 1)

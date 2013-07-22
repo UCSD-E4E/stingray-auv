@@ -62,6 +62,21 @@ void Nav::initStates()
     prev_depth_int = 0.;
     prev_surge_int = 0.;
 
+    // Init previous derivative calues
+    prev_roll_deriv = 0.;
+    prev_pitch_deriv = 0.;
+    prev_yaw_deriv = 0.;
+    prev_depth_deriv = 0.;
+    prev_surge_deriv = 0.;
+
+    // Init alpha terms
+    alpha_roll = 0.;
+    alpha_pitch = 0.;
+    alpha_yaw = 0.;
+    alpha_depth = 0.;
+    alpha_surge = 0.;
+
+
     // Init variables for storing current integrator values.
     curr_pitch_int = 0.;
     curr_roll_int = 0.;
@@ -123,8 +138,12 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
     tf::Quaternion q;
     tf::quaternionMsgToTF(msg->orientation, q);
     tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
-
-
+   
+   //Perry Hack
+    double temp = pitch;
+    pitch = -roll;
+    roll = -temp;
+    
     // Gabe
     // Correction of data code. Take roll and flip it
     if (roll_upsidedown)
@@ -134,16 +153,14 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 			roll -= M_PI;
 		}
 		else
-	{
+		{
 			roll += M_PI;
 		}
 	}
-	}
-
+    
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll, pitch, yaw);
     //ROS_DEBUG_THROTTLE(15, "Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     //ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
-=======
     ROS_DEBUG("Microstrain RPY = (%lf, %lf, %lf)", roll*180/M_PI, pitch*180/M_PI, yaw*180/M_PI);
     ROS_DEBUG("Microstrain Quaternions = (%lf, %lf, %lf, %lf)", msg->orientation.x, msg->orientation.y, msg->orientation.z, msg->orientation.w);
 } // end microstrainCallback()
@@ -151,9 +168,7 @@ void Nav::microstrainCallback(const sensor_msgs::Imu::ConstPtr& msg)
 
 /*------------------------------------------------------------------------------
  * compassCallback()
- * Callback for compass data.
- *----------------------------------------------------------------------------*/
-
+*/
 void Nav::compassCallback(const sensor_msgs::Imu::ConstPtr& msg)
 {
     // Convert quaternion to RPY.
@@ -199,6 +214,7 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_roll_p = config.gain_roll_p;
     gain_roll_i = config.gain_roll_i;
     gain_roll_d = config.gain_roll_d;
+    alpha_roll=config.alpha_roll;
     min_int_roll = config.min_int_roll;
     max_int_roll = config.max_int_roll;
 
@@ -206,6 +222,7 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_pitch_p = config.gain_pitch_p;
     gain_pitch_i = config.gain_pitch_i;
     gain_pitch_d = config.gain_pitch_d;
+    alpha_pitch=config.alpha_pitch;
     min_int_pitch = config.min_int_pitch;
     max_int_pitch = config.max_int_pitch;
 
@@ -213,6 +230,7 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_yaw_p = config.gain_yaw_p;
     gain_yaw_i = config.gain_yaw_i;
     gain_yaw_d = config.gain_yaw_d;
+    alpha_yaw=config.alpha_yaw
     min_int_yaw = config.min_int_yaw;
     max_int_yaw = config.max_int_yaw;
 
@@ -220,6 +238,7 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_depth_p = config.gain_depth_p;
     gain_depth_i = config.gain_depth_i;
     gain_depth_d = config.gain_depth_d;
+    alpha_depth=config.alpha_depth;
     min_int_depth = config.min_int_depth;
     max_int_depth = config.max_int_depth;
 
@@ -227,9 +246,10 @@ void Nav::configCallback(nav::navParamsConfig& config, uint32_t level)
     gain_surge_p = config.gain_surge_p;
     gain_surge_i = config.gain_surge_i;
     gain_surge_d = config.gain_surge_d;
+    alpha_surge=config.alpha_surge;
     min_int_surge = config.min_int_surge;
     max_int_surge = config.max_int_surge;
-
+    
     roll_upsidedown = config.roll_upsidedown;
 } // end configCallback()
 
@@ -286,13 +306,19 @@ int main(int argc, char **argv)
     private_node_handle_.param("min_int_depth", nav->min_int_depth, double(0.));
     private_node_handle_.param("max_int_depth", nav->max_int_depth, double(0.));
     private_node_handle_.param("min_int_surge", nav->min_int_surge, double(0.));
-    private_node_handle_.param("max_int_surge", nav->max_int_surge, double(0.));
+	private_node_handle_.param("max_int_surge", nav->max_int_surge, double(0.));    
+	private_node_handle_.param("alpha_roll", nav->alpha_roll, double(0.));
+    private_node_handle_.param("alpha_pitch", nav->alpha_pitch, double(0.));
+    private_node_handle_.param("alpha_yaw", nav->alpha_yaw, double(0.));
+    private_node_handle_.param("alpha_depth", nav->alpha_depth, double(0.));
+    private_node_handle_.param("alpha_surge", nav->alpha_surge, double(0.));
+
 
     // Tell ROS to run this node at the desired rate.
     ros::Rate loop_rate(rate);
 
     // Set up ROS subscribers and clients so that data can be found.
-
+    
     // !! Removed subscriptions to compass and planner nodes
     // ros::Subscriber compass_sub = n.subscribe("os5000_data", 1000, &Nav::compassCallback, nav);
        ros::Subscriber compass_depth = n.subscribe("depthMessage", 1000, &Nav::compassDepthCallback, nav);
@@ -338,7 +364,9 @@ int main(int argc, char **argv)
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_roll_error;
         pid_srv.request.previous_integrator_val = nav->prev_roll_int;
-        nav->dt_roll = dt;
+        pid_srv.request.previous_derivative_val = nav->prev_roll_deriv;
+	    pid_srv.request.alpha = alpha_roll;
+	    nav->dt_roll = dt;
         pid_srv.request.dt = nav->dt_roll;
         pid_srv.request.gain_p = nav->gain_roll_p;
         pid_srv.request.gain_i = nav->gain_roll_i;
@@ -352,6 +380,7 @@ int main(int argc, char **argv)
         {
             nav->u_roll = pid_srv.response.u;
             nav->prev_roll_int = pid_srv.response.current_integrator_val;
+	        nav->prev_roll_deriv=pid.srv.response.current_derivative_val;
             nav->prev_roll_error = pid_srv.response.current_error;
             ROS_DEBUG("U Roll = %f", pid_srv.response.u);
         }
@@ -373,7 +402,9 @@ int main(int argc, char **argv)
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_pitch_error;
         pid_srv.request.previous_integrator_val = nav->prev_pitch_int;
-        nav->dt_pitch = dt;
+		pid_srv.request.previous_derivative_val = nav->prev_pitch_deriv;
+		pid_srv.request.alpha = nav->alpha_pitch;       
+ 		nav->dt_pitch = dt;
         pid_srv.request.dt = nav->dt_pitch;
         pid_srv.request.gain_p = nav->gain_pitch_p;
         pid_srv.request.gain_i = nav->gain_pitch_i;
@@ -388,6 +419,7 @@ int main(int argc, char **argv)
         {
             nav->u_pitch = pid_srv.response.u;
             nav->prev_pitch_int = pid_srv.response.current_integrator_val;
+	    	nav->prev_pitch_deriv = pid_srv.response.current_derivative_val;
             nav->prev_pitch_error = pid_srv.response.current_error;
             ROS_DEBUG("U Pitch = %f", pid_srv.response.u);
         }
@@ -434,7 +466,9 @@ int main(int argc, char **argv)
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_yaw_error;
         pid_srv.request.previous_integrator_val = nav->prev_yaw_int;
-        nav->dt_yaw = dt;
+		pid_srv.request.previous_derivative_val= nav->prev_yaw_deriv;
+		pid_srv.request.alpha = nav->alpha_yaw;               
+		nav->dt_yaw = dt;
         pid_srv.request.dt = nav->dt_yaw;
         pid_srv.request.gain_p = nav->gain_yaw_p;
         pid_srv.request.gain_i = nav->gain_yaw_i;
@@ -458,6 +492,7 @@ int main(int argc, char **argv)
                 nav->u_yaw = nav->min_yaw_angle;
             }
             nav->prev_yaw_int = pid_srv.response.current_integrator_val;
+	    	nav->prev_yaw_deriv = pid_srv.response.current_derivative_val;
             nav->prev_yaw_error = pid_srv.response.current_error;
             ROS_DEBUG("U Yaw = %f", pid_srv.response.u);
         }
@@ -478,6 +513,15 @@ int main(int argc, char **argv)
 
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_depth_error;
+        pid_srv.request.previous_integrator_val = nav->prev_depth_int;
+		pid_srv.request.previous_derivative_val = nav->prev_depth_deriv;
+		pid_srv.request.alpha = nav->alpha-depth;
+        nav->dt_depth = dt;
+        pid_srv.request.dt = nav->dt_depth;
+        pid_srv.request.gain_p = nav->gain_depth_p;
+        pid_srv.request.gain_i = nav->gain_depth_i;
+        pid_srv.request.gain_d = nav->gain_depth_d;
+        pid_srv.request.integral_term_min = nav->min_int_depth;
         pid_srv.request.integral_term_max = nav->max_int_depth;
 
         ROS_DEBUG("Depth = %f", nav->depth);
@@ -486,6 +530,7 @@ int main(int argc, char **argv)
         {
             nav->u_depth = pid_srv.response.u;
             nav->prev_depth_int = pid_srv.response.current_integrator_val;
+		    nav->prev_depth_deriv = pid_srv.response.current_derivative_val;
             nav->prev_depth_error = pid_srv.response.current_error;
             ROS_DEBUG("U Depth = %f", pid_srv.response.u);
         }
@@ -507,6 +552,7 @@ int main(int argc, char **argv)
         // Send previous errors, gains and integrator values to PID.
         pid_srv.request.previous_error = nav->prev_surge_error;
         pid_srv.request.previous_integrator_val = nav->prev_surge_int;
+		pid_srv.request.previous_derivative_val = nav->prev_surge_deriv;
         nav->dt_surge = dt;
         pid_srv.request.dt = nav->dt_surge;
         pid_srv.request.gain_p = nav->gain_surge_p;
@@ -521,6 +567,7 @@ int main(int argc, char **argv)
         {
             nav->u_surge = pid_srv.response.u;
             nav->prev_surge_int = pid_srv.response.current_integrator_val;
+	   		nav->prev_surge_deriv = pid_srv.response.current_derivative_val;
             nav->prev_surge_error = pid_srv.response.current_error;
             ROS_DEBUG("U Surge = %f", pid_srv.response.u);
         }
