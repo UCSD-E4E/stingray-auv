@@ -30,17 +30,17 @@
   <node pkg="pid" type="pidserver" name="pid"/>
 
   <node pkg="planner" type="planner" name="planner">
-    <param name="target_surge" value="0.0"/> 
-    <param name="target_lat"   value="0.0"/> 
-    <param name="target_lon"   value="0.0"/> 
-    <param name="target_depth" value="0.0"/> 
-    <param name="target_roll"  value="0.0"/> 
-    <param name="target_pitch" value="0.0"/> 
-    <param name="target_yaw"   value="0.0"/> 
+    <param name="target_surge" value="0.0"/>
+    <param name="target_lat"   value="0.0"/>
+    <param name="target_lon"   value="0.0"/>
+    <param name="target_depth" value="0.0"/>
+    <param name="target_roll"  value="0.0"/>
+    <param name="target_pitch" value="0.0"/>
+    <param name="target_yaw"   value="0.0"/>
   </node>
-  
+
   <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui"/>
-  
+
   <node pkg="nav" type="nav" name="nav">
     <param name="rate" value="200"/>
     <param name="gain_roll_p"   value="1.0"/>
