@@ -1,6 +1,7 @@
 <launch>
 	<arg name="debug" default="false"/>
 	
+    	<include file="$(find hammerhead_start)/$(env ROBOT).machine" />
 	<include file="$(find hammerhead_start)/config/hammerhead_sensors.xml"/>
 	<include file="$(find hammerhead_start)/config/hammerhead_odometry.xml"/>
 	<include file="$(find hammerhead_start)/config/hammerhead_navigation.xml"/>

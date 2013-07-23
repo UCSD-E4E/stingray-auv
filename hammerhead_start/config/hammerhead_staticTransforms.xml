@@ -1,17 +1,17 @@
 <launch>
-	<node pkg="tf" type="static_transform_publisher" name="base_link"
+	<node pkg="tf" type="static_transform_publisher" name="tf_base_link"
 		args="0 0 0 0 0 0 /base_link /stereo 100" machine="control"/>
 
-	<node pkg="tf" type="static_transform_publisher" name="left_camera_optical_frame"
+	<node pkg="tf" type="static_transform_publisher" name="tf_left_camera_optical_frame"
 		args="0 0 0 0 0 0 /stereo /stereo_optical_frame 100" machine="control"/>
 
-	<node pkg="tf" type="static_transform_publisher" name="right_camera_optical_frame"
+	<node pkg="tf" type="static_transform_publisher" name="tf_right_camera_optical_frame"
 		args="0 0 0 0 0 0 /stereo /stereo_optical_frame 100" machine="control"/>
 
-	<node pkg="tf" type="static_transform_publisher" name="imu"
+	<node pkg="tf" type="static_transform_publisher" name="tf_imu"
 		args="0 0 0 0 0 0 /base_link /imu 100" machine="control"/>
 
-	<node pkg="tf" type="static_transform_publisher" name="compass"
+	<node pkg="tf" type="static_transform_publisher" name="tf_compass"
 		args="0 0 0 0 0 0 /base_link /compass 100" machine="control"/>
 </launch>
 
