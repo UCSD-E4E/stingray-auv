@@ -1,0 +1,23 @@
+<package>
+  <description brief="Hammerhead">
+    Running the Hammerhead nodes.
+  </description>
+  <author>Perry Naughton</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url></url>
+
+  <depend package="tf"/>
+  <depend package="stereo_image_proc"/>
+  <depend package="prosilica"/>
+  <depend package="robot_pose_ekf"/>
+  <depend package="viso2"/>
+  <depend package="microstrain_3dmgx2_imu">
+  <depend package="mission_controller"/>
+  <depend package="nav"/>
+  <depend package="os5000"/>
+  <depend package="pid"/>
+  <depend package="planner"/>
+  <depend package="sbBTA252"/>
+  <depend package="state_estimator"/>
+</package>

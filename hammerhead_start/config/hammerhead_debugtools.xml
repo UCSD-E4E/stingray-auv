@@ -1,0 +1,38 @@
+<launch>
+	<arg name="stereo_view" default="true"/>
+	<arg name="rviz" default="true"/>
+	<arg name="rosbag" default="true"/>
+	<arg name="rxconsole" default="true"/>
+	<arg name="dyn_reconfigure" default="true"/>
+   
+	<group if="$(arg rviz)">
+		<!--DEBUGGING TOOLS-->
+		   <node pkg="rviz" type="rviz" name="rviz"/>
+	</group>
+ 
+	<group if="$(arg stereo_view)">
+		<!--STEREO VIEW-->
+		<node pkg="image_view" type="stereo_view" name="viewer">
+	      		<remap from="stereo" to="stereo_down"/>
+	      		<remap from="image" to="image_rect"/>
+	  	</node>
+    	</group>
+
+	<group if="$(arg rosbag)">
+		<!--RECORD DATA-->
+		    <node pkg="rosbag" type="record" name="rosbag_record"
+			args="use_sim_time:=true ">
+		    </node>
+	</group>
+
+
+	<group if="$(arg rxconsole)">
+		<node pkg="rxtools" type="rxconsole" name="rxconsole"/>
+	</group>
+
+	<group if="$(arg dyn_reconfigure)">
+  		<node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui"/>
+	</group>
+
+</launch>
+

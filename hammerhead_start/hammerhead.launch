@@ -1,0 +1,13 @@
+<launch>
+	<arg name="debug" default="false"/>
+	
+	<include file="$(find hammerhead_start)/config/hammerhead_sensors.xml"/>
+	<include file="$(find hammerhead_start)/config/hammerhead_odometry.xml"/>
+	<include file="$(find hammerhead_start)/config/hammerhead_navigation.xml"/>
+	<include file="$(find hammerhead_start)/config/hammerhead_stereo.xml"/>
+	<include file="$(find hammerhead_start)/config/hammerhead_staticTransforms.xml"/>
+
+<group if="$(arg debug)">
+	<include file="$(find hammerhead_start)/config/hammerhead_sensors.xml"/>
+</group>
+</launch>
