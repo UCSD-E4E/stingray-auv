@@ -12,7 +12,7 @@
   <depend package="prosilica"/>
   <depend package="robot_pose_ekf"/>
   <depend package="viso2"/>
-  <depend package="microstrain_3dmgx2_imu">
+  <depend package="microstrain_3dmgx2_imu"/>
   <depend package="mission_controller"/>
   <depend package="nav"/>
   <depend package="os5000"/>
