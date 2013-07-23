@@ -33,6 +33,8 @@ struct PIDRequest_ {
   , target_val(0.0)
   , previous_error(0.0)
   , previous_integrator_val(0.0)
+  , previous_derivative_val(0.0)
+  , alpha(0.0)
   , integral_term_min(0.0)
   , integral_term_max(0.0)
   , dt(0.0)
@@ -47,6 +49,8 @@ struct PIDRequest_ {
   , target_val(0.0)
   , previous_error(0.0)
   , previous_integrator_val(0.0)
+  , previous_derivative_val(0.0)
+  , alpha(0.0)
   , integral_term_min(0.0)
   , integral_term_max(0.0)
   , dt(0.0)
@@ -74,6 +78,12 @@ struct PIDRequest_ {
   typedef double _previous_integrator_val_type;
   double previous_integrator_val;
 
+  typedef double _previous_derivative_val_type;
+  double previous_derivative_val;
+
+  typedef double _alpha_type;
+  double alpha;
+
   typedef double _integral_term_min_type;
   double integral_term_min;
 
@@ -100,6 +110,7 @@ struct PIDResponse_ {
 
   PIDResponse_()
   : current_integrator_val(0.0)
+  , current_derivative_val(0.0)
   , current_error(0.0)
   , u(0.0)
   {
@@ -107,6 +118,7 @@ struct PIDResponse_ {
 
   PIDResponse_(const ContainerAllocator& _alloc)
   : current_integrator_val(0.0)
+  , current_derivative_val(0.0)
   , current_error(0.0)
   , u(0.0)
   {
@@ -114,6 +126,9 @@ struct PIDResponse_ {
 
   typedef double _current_integrator_val_type;
   double current_integrator_val;
+
+  typedef double _current_derivative_val_type;
+  double current_derivative_val;
 
   typedef double _current_error_type;
   double current_error;
@@ -154,12 +169,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::pid::PIDRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "4d3f19ad468f6225a1cf11a4c82adf57";
+    return "1e75cb4303970824cbccf86da4b113b2";
   }
 
   static const char* value(const  ::pid::PIDRequest_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x4d3f19ad468f6225ULL;
-  static const uint64_t static_value2 = 0xa1cf11a4c82adf57ULL;
+  static const uint64_t static_value1 = 0x1e75cb4303970824ULL;
+  static const uint64_t static_value2 = 0xcbccf86da4b113b2ULL;
 };
 
 template<class ContainerAllocator>
@@ -183,6 +198,8 @@ float64 current_val\n\
 float64 target_val\n\
 float64 previous_error\n\
 float64 previous_integrator_val\n\
+float64 previous_derivative_val\n\
+float64 alpha\n\
 float64 integral_term_min\n\
 float64 integral_term_max\n\
 float64 dt\n\
@@ -208,12 +225,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::pid::PIDResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "12d2a7003b0a8e0851c9897028086206";
+    return "15d41896fdeedfac68b7d021d4e1502a";
   }
 
   static const char* value(const  ::pid::PIDResponse_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0x12d2a7003b0a8e08ULL;
-  static const uint64_t static_value2 = 0x51c9897028086206ULL;
+  static const uint64_t static_value1 = 0x15d41896fdeedfacULL;
+  static const uint64_t static_value2 = 0x68b7d021d4e1502aULL;
 };
 
 template<class ContainerAllocator>
@@ -231,6 +248,7 @@ struct Definition< ::pid::PIDResponse_<ContainerAllocator> > {
   static const char* value() 
   {
     return "float64 current_integrator_val\n\
+float64 current_derivative_val\n\
 float64 current_error\n\
 float64 u\n\
 \n\
@@ -261,6 +279,8 @@ template<class ContainerAllocator> struct Serializer< ::pid::PIDRequest_<Contain
     stream.next(m.target_val);
     stream.next(m.previous_error);
     stream.next(m.previous_integrator_val);
+    stream.next(m.previous_derivative_val);
+    stream.next(m.alpha);
     stream.next(m.integral_term_min);
     stream.next(m.integral_term_max);
     stream.next(m.dt);
@@ -282,6 +302,7 @@ template<class ContainerAllocator> struct Serializer< ::pid::PIDResponse_<Contai
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
     stream.next(m.current_integrator_val);
+    stream.next(m.current_derivative_val);
     stream.next(m.current_error);
     stream.next(m.u);
   }
@@ -299,7 +320,7 @@ template<>
 struct MD5Sum<pid::PID> {
   static const char* value() 
   {
-    return "bb075cbccfb9d07e9bc04cf20b78a3d2";
+    return "4c96018bb7f96f70264d35da4bbe39f4";
   }
 
   static const char* value(const pid::PID&) { return value(); } 
@@ -319,7 +340,7 @@ template<class ContainerAllocator>
 struct MD5Sum<pid::PIDRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "bb075cbccfb9d07e9bc04cf20b78a3d2";
+    return "4c96018bb7f96f70264d35da4bbe39f4";
   }
 
   static const char* value(const pid::PIDRequest_<ContainerAllocator> &) { return value(); } 
@@ -339,7 +360,7 @@ template<class ContainerAllocator>
 struct MD5Sum<pid::PIDResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "bb075cbccfb9d07e9bc04cf20b78a3d2";
+    return "4c96018bb7f96f70264d35da4bbe39f4";
   }
 
   static const char* value(const pid::PIDResponse_<ContainerAllocator> &) { return value(); } 

@@ -206,6 +206,11 @@ void SBBTA252::publishMessage(ros::Publisher *pub_thruster_data)
 void SBBTA252::configCallback(sbBTA252::sbBTA252ParamsConfig& config, uint32_t level)
 {
   // Set class variables to new values.
+  roll_freq = config.roll_freq;
+  pitch_freq = config.pitch_freq;
+  yaw_freq = config.yaw_freq;
+  depth_freq = config.depth_freq;
+  surge_freq = config.surge_freq;
   portname     = config.port.c_str();
   baud         = config.baud;
   t_left_yaw   = config.t_left_yaw;
@@ -221,7 +226,7 @@ void SBBTA252::configCallback(sbBTA252::sbBTA252ParamsConfig& config, uint32_t l
   speed_perc   = config.speed_perc;
   get_status   = config.get_status;
   
-  depth_frequency = config.depth_frequency;
+
 
   // Check to see if we should attempt to reconnect to the thrusters.
   if (config.reconnect)
@@ -448,13 +453,18 @@ int main(int argc, char **argv)
   {
     ROS_ERROR("Could not connect to thrusters on port %s at %d baud. You can try changing the parameters using the dynamic reconfigure gui.", portname.c_str(), baud);
   }
-  
-  int loopCount = 0;
+
+ //Perry: create a hold for the thruster commands 
+  long loopCount = 0;
+  float savedRoll = thruster->u_roll;
+  float savedPitch = thruster->u_depth;
+  float savedYaw = thruster->u_yaw;
   float savedDepth = thruster->u_depth;
-  
+  float savedSurge = thruster->u_surge;
+
   // GABE: scale radians to motor speeds
   float yawScale = 1; // 80 / (2 * M_PI);
-  float rollPitchScale = 1; //80 / M_PI;
+  //float rollPitchScale = 1; //80 / M_PI;
   
   // Main loop.thruster
   while (n.ok())
@@ -470,12 +480,13 @@ int main(int argc, char **argv)
           thruster->sendChangeAddressCommand(thruster->thrust_addr, thruster->new_addr);
         }
         
-        thruster->sendSpeedCommand(1, thruster->speed_perc);
+        thruster->sendSpeedCommand(thruster->thrust_addr, thruster->speed_perc);
+        /*
         thruster->sendSpeedCommand(2, thruster->speed_perc);
         thruster->sendSpeedCommand(3, thruster->speed_perc);
         thruster->sendSpeedCommand(4, thruster->speed_perc);
         thruster->sendSpeedCommand(5, thruster->speed_perc);
-        
+        */
         if (thruster->get_status)
         {
           thruster->sendReadCommand(thruster->thrust_addr);
@@ -486,19 +497,37 @@ int main(int argc, char **argv)
       {
         // Not doing manual commands so use the planner thrust 
         
-        if ( loopCount >= thruster->depth_frequency)
+        if ( loopCount % thruster->roll_freq == 0)
         {
-          // OLD: Send the Depth commands
-          /*
-          thruster->sendSpeedCommand(thruster->t_left_roll, thruster->u_depth);
-          thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_depth);
-          */
-          
+
           // GS: save current depth
-          savedDepth = thruster->u_depth;
-          loopCount = 0;
+          savedRoll = thruster->u_roll;
         }
         
+if ( loopCount  % thruster->pitch_freq == 0)
+        {
+          // GS: save current depth
+          savedPitch = thruster->u_pitch;
+        }
+if ( loopCount % thruster->yaw_freq == 0)
+        {
+
+          savedYaw = thruster->u_yaw;
+        }
+if ( loopCount % thruster->depth_freq == 0)
+        {
+
+          // GS: save current depth
+          savedDepth = thruster->u_depth;
+        }
+
+if ( loopCount % thruster->surge_freq == 0)
+        {
+
+          savedSurge = thruster->u_surge;
+        }
+
+
         float negSavedDepth = savedDepth * -1;
         
         // Send the Pitch command
@@ -506,8 +535,8 @@ int main(int argc, char **argv)
 
 
         // Send the Roll commands
-        thruster->sendSpeedCommand(thruster->t_left_roll, (thruster->u_roll * -1) + negSavedDepth);
-        thruster->sendSpeedCommand(thruster->t_right_roll, thruster->u_roll + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_left_roll, (thruster->u_roll ) + negSavedDepth);
+        thruster->sendSpeedCommand(thruster->t_right_roll, (thruster->u_roll*-1) + negSavedDepth);
         loopCount++;
         
         // Send the Yaw commands
@@ -768,8 +797,8 @@ char SBBTA252::getSpeed(int bit, int speed)
   // Check validity of thruster address
   if (speed < -100 || speed > 100)
   {
-    ROS_WARN("Speed %d is out of range. Sending 100.", speed);
-    speed = 100;
+    ROS_WARN("Speed %d is out of range. Sending +/- 100.", speed);
+    speed = ((speed>0)-(speed<0))*100;
   }
   
   int dec;
@@ -779,11 +808,11 @@ char SBBTA252::getSpeed(int bit, int speed)
   }
   else if (speed > 0)
   {
-    dec = speed + 130;
+    dec = speed + 128;
   }
   else if (speed < 0)
   {
-    dec = speed + 125;
+    dec = speed + 127;
   }
   
   if (bit == 1)

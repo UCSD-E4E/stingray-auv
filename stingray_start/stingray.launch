@@ -1,5 +1,8 @@
 <launch>
-  <node pkg="rxtools" type="rxconsole" name="rxconsole"/>
+
+  <include file="$(find stingray_start)/stingray.machine" />
+
+  <!--node pkg="rxtools" type="rxconsole" name="rxconsole"/-->
 
   <node pkg="sbBTA252" type="sbBTA252" name="thrusters"/>
 
@@ -36,7 +39,7 @@
     <param name="target_yaw"   value="0.0"/> 
   </node>
   
-  <node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui"/>
+  <!--node pkg="dynamic_reconfigure" type="reconfigure_gui" name="reconfigure_gui"/-->
   
   <node pkg="nav" type="nav" name="nav">
     <param name="rate" value="200"/>
