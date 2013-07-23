@@ -3,10 +3,10 @@
     <arg name="right_ip"     default="192.168.3.101"/>
     <arg name="left_yaml"    default="101"/>
     <arg name="right_yaml"   default="102"/>
-    <arg name="start_stereo" default="false"/>
+    <arg name="start_stereo" default="true"/>
 
     <group ns="stereo">
-        <node pkg="prosilica_camera" type="prosilica_node" name="left" output="screen">
+        <node pkg="prosilica_camera" type="prosilica_node" name="left" output="screen" machine="vision">
             <rosparam command="load" file="$(find natgeo)/camera_info/gc750c.yaml"/>
             <param name="ip_address" value="$(arg left_ip)"/>
             <param name="exposure_auto_max" value=".03"/>
@@ -14,7 +14,7 @@
             <remap from="camera" to="left"/>
         </node>
 
-        <node pkg="prosilica_camera" type="prosilica_node" name="right" output="screen">
+        <node pkg="prosilica_camera" type="prosilica_node" name="right" output="screen" machine="vision">
             <rosparam command="load" file="$(find natgeo)/camera_info/gc750c.yaml"/>
             <param name="ip_address" value="$(arg right_ip)"/>
             <param name="exposure_auto_max" value=".03"/>
@@ -23,7 +23,7 @@
         </node>
 
         <group if="$(arg start_stereo)">
-            <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc">
+            <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" machine="vision">
                 <param name="approximate_sync" value="True"/>
                 <param name="queue_size"       value="10"/>
             </node>

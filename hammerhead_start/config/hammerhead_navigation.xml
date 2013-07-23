@@ -1,10 +1,10 @@
 <launch>
 
-  <node pkg="sbBTA252" type="sbBTA252" name="thrusters"/>
+  <node pkg="sbBTA252" type="sbBTA252" name="thrusters" machine="control"/>
 
-  <node pkg="pid" type="pidserver" name="pid"/>
+  <node pkg="pid" type="pidserver" name="pid" machine="control"/>
 
-  <node pkg="planner" type="planner" name="planner">
+  <node pkg="planner" type="planner" name="planner" machine="control">
     <param name="target_surge" value="0.0"/> 
     <param name="target_lat"   value="0.0"/> 
     <param name="target_lon"   value="0.0"/> 
@@ -14,7 +14,7 @@
     <param name="target_yaw"   value="0.0"/> 
   </node>
 
-<node pkg="nav" type="nav" name="nav">
+<node pkg="nav" type="nav" name="nav" machine="control">
     <param name="rate" value="200"/>
     <param name="gain_roll_p"   value="1.0"/>
     <param name="gain_roll_i"   value="0.0"/>
@@ -48,5 +48,5 @@
     <param name="max_int_speed" value="50.0"/>
   </node>
 
-  <node pkg="mission_controller" type="mission_controller" name="mission_controller"/>
+  <node pkg="mission_controller" type="mission_controller" name="mission_controller" machine="control"/>
 </launch>

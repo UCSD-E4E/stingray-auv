@@ -1,11 +1,11 @@
 <launch>
   
-   <node pkg="viso2_ros" type="stereo_odometer" name="viso2">
+   <node pkg="viso2_ros" type="stereo_odometer" name="viso2" machine="vision">
       <remap from="stereo" to="stereo"/>
       <remap from="image" to="image_rect"/>
    </node>
 
-   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
+   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" machine="vision">
      <param name="output_frame" value="odom_combined"/>
      <param name="freq" value="30.0"/>
      <param name="sensor_timeout" value="1.0"/>
