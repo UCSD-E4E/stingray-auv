@@ -206,11 +206,11 @@ void SBBTA252::publishMessage(ros::Publisher *pub_thruster_data)
 void SBBTA252::configCallback(sbBTA252::sbBTA252ParamsConfig& config, uint32_t level)
 {
   // Set class variables to new values.
-  roll_freq = config.port.roll_update;
-  pitch_freq = config.port.pitch_update;
-  yaw_freq = config.port.yaw_update;
-  depth_freq = config.port.depth_update;
-  surge_freq = config.port.surge_update;
+  roll_freq = config.roll_freq;
+  pitch_freq = config.pitch_freq;
+  yaw_freq = config.yaw_freq;
+  depth_freq = config.depth_freq;
+  surge_freq = config.surge_freq;
   portname     = config.port.c_str();
   baud         = config.baud;
   t_left_yaw   = config.t_left_yaw;
@@ -455,16 +455,16 @@ int main(int argc, char **argv)
   }
 
  //Perry: create a hold for the thruster commands 
-  double loopCount = 0;
+  long loopCount = 0;
   float savedRoll = thruster->u_roll;
   float savedPitch = thruster->u_depth;
-  float savedYaw = thruster->u_Yaw;
+  float savedYaw = thruster->u_yaw;
   float savedDepth = thruster->u_depth;
-  float savedSurge = thruster->u_Surge;
+  float savedSurge = thruster->u_surge;
 
   // GABE: scale radians to motor speeds
   float yawScale = 1; // 80 / (2 * M_PI);
-  float rollPitchScale = 1; //80 / M_PI;
+  //float rollPitchScale = 1; //80 / M_PI;
   
   // Main loop.thruster
   while (n.ok())
@@ -497,7 +497,7 @@ int main(int argc, char **argv)
       {
         // Not doing manual commands so use the planner thrust 
         
-        if ( loopCount % thruster->roll_frequency == 0)
+        if ( loopCount % thruster->roll_freq == 0)
         {
 
           // GS: save current depth

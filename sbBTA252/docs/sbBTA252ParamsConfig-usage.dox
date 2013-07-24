@@ -1,6 +1,11 @@
 \subsubsection usage Usage
 \verbatim
 <node name="sbBTA252" pkg="sbBTA252" type="sbBTA252">
+  <param name="roll_freq" type="int" value="1" />
+  <param name="pitch_freq" type="int" value="1" />
+  <param name="yaw_freq" type="int" value="1" />
+  <param name="depth_freq" type="int" value="1" />
+  <param name="surge_freq" type="int" value="1" />
   <param name="port" type="str" value="/dev/ttyS0" />
   <param name="baud" type="int" value="115200" />
   <param name="t_left_yaw" type="int" value="3" />
@@ -16,7 +21,6 @@
   <param name="new_addr" type="int" value="1" />
   <param name="speed_perc" type="int" value="0" />
   <param name="get_status" type="bool" value="False" />
-  <param name="depth_frequency" type="int" value="5" />
 </node>
 \endverbatim
 

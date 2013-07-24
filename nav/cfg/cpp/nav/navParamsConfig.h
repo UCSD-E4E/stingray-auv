@@ -266,26 +266,31 @@ class DEFAULT
         if("gain_roll_p"==(*i)->name){gain_roll_p = boost::any_cast<double>(val);}
         if("gain_roll_i"==(*i)->name){gain_roll_i = boost::any_cast<double>(val);}
         if("gain_roll_d"==(*i)->name){gain_roll_d = boost::any_cast<double>(val);}
+        if("alpha_roll"==(*i)->name){alpha_roll = boost::any_cast<double>(val);}
         if("min_int_roll"==(*i)->name){min_int_roll = boost::any_cast<double>(val);}
         if("max_int_roll"==(*i)->name){max_int_roll = boost::any_cast<double>(val);}
         if("gain_pitch_p"==(*i)->name){gain_pitch_p = boost::any_cast<double>(val);}
         if("gain_pitch_i"==(*i)->name){gain_pitch_i = boost::any_cast<double>(val);}
         if("gain_pitch_d"==(*i)->name){gain_pitch_d = boost::any_cast<double>(val);}
+        if("alpha_pitch"==(*i)->name){alpha_pitch = boost::any_cast<double>(val);}
         if("min_int_pitch"==(*i)->name){min_int_pitch = boost::any_cast<double>(val);}
         if("max_int_pitch"==(*i)->name){max_int_pitch = boost::any_cast<double>(val);}
         if("gain_yaw_p"==(*i)->name){gain_yaw_p = boost::any_cast<double>(val);}
         if("gain_yaw_i"==(*i)->name){gain_yaw_i = boost::any_cast<double>(val);}
         if("gain_yaw_d"==(*i)->name){gain_yaw_d = boost::any_cast<double>(val);}
+        if("alpha_yaw"==(*i)->name){alpha_yaw = boost::any_cast<double>(val);}
         if("min_int_yaw"==(*i)->name){min_int_yaw = boost::any_cast<double>(val);}
         if("max_int_yaw"==(*i)->name){max_int_yaw = boost::any_cast<double>(val);}
         if("gain_depth_p"==(*i)->name){gain_depth_p = boost::any_cast<double>(val);}
         if("gain_depth_i"==(*i)->name){gain_depth_i = boost::any_cast<double>(val);}
         if("gain_depth_d"==(*i)->name){gain_depth_d = boost::any_cast<double>(val);}
+        if("alpha_depth"==(*i)->name){alpha_depth = boost::any_cast<double>(val);}
         if("min_int_depth"==(*i)->name){min_int_depth = boost::any_cast<double>(val);}
         if("max_int_depth"==(*i)->name){max_int_depth = boost::any_cast<double>(val);}
         if("gain_surge_p"==(*i)->name){gain_surge_p = boost::any_cast<double>(val);}
         if("gain_surge_i"==(*i)->name){gain_surge_i = boost::any_cast<double>(val);}
         if("gain_surge_d"==(*i)->name){gain_surge_d = boost::any_cast<double>(val);}
+        if("alpha_surge"==(*i)->name){alpha_surge = boost::any_cast<double>(val);}
         if("min_int_surge"==(*i)->name){min_int_surge = boost::any_cast<double>(val);}
         if("max_int_surge"==(*i)->name){max_int_surge = boost::any_cast<double>(val);}
         if("roll_upsidedown"==(*i)->name){roll_upsidedown = boost::any_cast<bool>(val);}
@@ -295,26 +300,31 @@ class DEFAULT
     double gain_roll_p;
 double gain_roll_i;
 double gain_roll_d;
+double alpha_roll;
 double min_int_roll;
 double max_int_roll;
 double gain_pitch_p;
 double gain_pitch_i;
 double gain_pitch_d;
+double alpha_pitch;
 double min_int_pitch;
 double max_int_pitch;
 double gain_yaw_p;
 double gain_yaw_i;
 double gain_yaw_d;
+double alpha_yaw;
 double min_int_yaw;
 double max_int_yaw;
 double gain_depth_p;
 double gain_depth_i;
 double gain_depth_d;
+double alpha_depth;
 double min_int_depth;
 double max_int_depth;
 double gain_surge_p;
 double gain_surge_i;
 double gain_surge_d;
+double alpha_surge;
 double min_int_surge;
 double max_int_surge;
 bool roll_upsidedown;
@@ -334,6 +344,8 @@ bool roll_upsidedown;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double gain_roll_d;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      double alpha_roll;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double min_int_roll;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double max_int_roll;
@@ -343,6 +355,8 @@ bool roll_upsidedown;
       double gain_pitch_i;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double gain_pitch_d;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      double alpha_pitch;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double min_int_pitch;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -354,6 +368,8 @@ bool roll_upsidedown;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double gain_yaw_d;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      double alpha_yaw;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double min_int_yaw;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double max_int_yaw;
@@ -364,6 +380,8 @@ bool roll_upsidedown;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double gain_depth_d;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      double alpha_depth;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double min_int_depth;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double max_int_depth;
@@ -373,6 +391,8 @@ bool roll_upsidedown;
       double gain_surge_i;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double gain_surge_d;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      double alpha_surge;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       double min_int_surge;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -545,6 +565,16 @@ navParamsConfig::GroupDescription<navParamsConfig::DEFAULT, navParamsConfig> Def
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_roll_d", "double", 0, "Derivative Roll Gain", "", &navParamsConfig::gain_roll_d)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.alpha_roll = 0.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.alpha_roll = 1.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.alpha_roll = 0.5;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_roll", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_roll)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_roll", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_roll)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.min_int_roll = -10.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.min_int_roll = 0.0;
@@ -594,6 +624,16 @@ navParamsConfig::GroupDescription<navParamsConfig::DEFAULT, navParamsConfig> Def
       Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_pitch_d", "double", 0, "Derivative Pitch Gain", "", &navParamsConfig::gain_pitch_d)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_pitch_d", "double", 0, "Derivative Pitch Gain", "", &navParamsConfig::gain_pitch_d)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.alpha_pitch = 0.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.alpha_pitch = 1.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.alpha_pitch = 0.5;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_pitch", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_pitch)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_pitch", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_pitch)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.min_int_pitch = -100.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -645,6 +685,16 @@ navParamsConfig::GroupDescription<navParamsConfig::DEFAULT, navParamsConfig> Def
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_yaw_d", "double", 0, "Derivative Yaw Gain", "", &navParamsConfig::gain_yaw_d)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.alpha_yaw = 0.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.alpha_yaw = 1.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.alpha_yaw = 0.5;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_yaw", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_yaw)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_yaw", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_yaw)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.min_int_yaw = -100.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.min_int_yaw = 0.0;
@@ -695,6 +745,16 @@ navParamsConfig::GroupDescription<navParamsConfig::DEFAULT, navParamsConfig> Def
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_depth_d", "double", 0, "Derivative Depth Gain", "", &navParamsConfig::gain_depth_d)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.alpha_depth = 0.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.alpha_depth = 1.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.alpha_depth = 0.5;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_depth", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_depth)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_depth", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_depth)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.min_int_depth = -100.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __max__.min_int_depth = 0.0;
@@ -744,6 +804,16 @@ navParamsConfig::GroupDescription<navParamsConfig::DEFAULT, navParamsConfig> Def
       Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_surge_d", "double", 0, "Derivative Surge Gain", "", &navParamsConfig::gain_surge_d)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("gain_surge_d", "double", 0, "Derivative Surge Gain", "", &navParamsConfig::gain_surge_d)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.alpha_surge = 0.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.alpha_surge = 1.0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.alpha_surge = 0.5;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_surge", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_surge)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(navParamsConfig::AbstractParamDescriptionConstPtr(new navParamsConfig::ParamDescription<double>("alpha_surge", "double", 0, "alpha for derivative", "", &navParamsConfig::alpha_surge)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.min_int_surge = -100.0;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"

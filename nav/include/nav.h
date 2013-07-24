@@ -231,6 +231,21 @@ public:
     //! Differential gain for surge.
     double gain_surge_d;
 
+    //alpha term for the derivative term of the PID controller
+    double alpha_roll;
+    double alpha_pitch;
+    double alpha_yaw;
+    double alpha_depth;
+    double alpha_surge;
+
+
+    //variables for storing derivative errors
+    double prev_roll_deriv;
+    double prev_pitch_deriv;
+    double prev_yaw_deriv;
+    double prev_depth_deriv;
+    double prev_surge_deriv;
+    
     // Delta time for each control loop.
     //! Elapsed time between control loops for roll.
     double dt_roll;

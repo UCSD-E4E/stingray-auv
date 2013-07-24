@@ -1,0 +1,15 @@
+<package>
+  <description brief="rpy_conversion">
+
+     rpy_conversion
+
+  </description>
+  <author>UWStereo</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rpy_conversion</url>
+
+<depend package="tf"/>
+</package>
+
+

@@ -263,6 +263,11 @@ class DEFAULT
         boost::any val;
         (*i)->getValue(config, val);
 
+        if("roll_freq"==(*i)->name){roll_freq = boost::any_cast<int>(val);}
+        if("pitch_freq"==(*i)->name){pitch_freq = boost::any_cast<int>(val);}
+        if("yaw_freq"==(*i)->name){yaw_freq = boost::any_cast<int>(val);}
+        if("depth_freq"==(*i)->name){depth_freq = boost::any_cast<int>(val);}
+        if("surge_freq"==(*i)->name){surge_freq = boost::any_cast<int>(val);}
         if("port"==(*i)->name){port = boost::any_cast<std::string>(val);}
         if("baud"==(*i)->name){baud = boost::any_cast<int>(val);}
         if("t_left_yaw"==(*i)->name){t_left_yaw = boost::any_cast<int>(val);}
@@ -278,11 +283,15 @@ class DEFAULT
         if("new_addr"==(*i)->name){new_addr = boost::any_cast<int>(val);}
         if("speed_perc"==(*i)->name){speed_perc = boost::any_cast<int>(val);}
         if("get_status"==(*i)->name){get_status = boost::any_cast<bool>(val);}
-        if("depth_frequency"==(*i)->name){depth_frequency = boost::any_cast<int>(val);}
       }
     }
 
-    std::string port;
+    int roll_freq;
+int pitch_freq;
+int yaw_freq;
+int depth_freq;
+int surge_freq;
+std::string port;
 int baud;
 int t_left_yaw;
 int t_right_yaw;
@@ -297,7 +306,6 @@ bool change_addr;
 int new_addr;
 int speed_perc;
 bool get_status;
-int depth_frequency;
 
     bool state;
     std::string name;
@@ -307,6 +315,16 @@ int depth_frequency;
 
 
 
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      int roll_freq;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      int pitch_freq;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      int yaw_freq;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      int depth_freq;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      int surge_freq;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       std::string port;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -337,8 +355,6 @@ int depth_frequency;
       int speed_perc;
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       bool get_status;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      int depth_frequency;
 //#line 255 "/opt/ros/fuerte/stacks/dynamic_reconfigure/templates/ConfigType.h"
 
     bool __fromMessage__(dynamic_reconfigure::Config &msg)
@@ -474,6 +490,56 @@ int depth_frequency;
     sbBTA252ParamsConfigStatics()
     {
 sbBTA252ParamsConfig::GroupDescription<sbBTA252ParamsConfig::DEFAULT, sbBTA252ParamsConfig> Default("Default", "", 0, 0, true, &sbBTA252ParamsConfig::groups);
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.roll_freq = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.roll_freq = 255;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.roll_freq = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("roll_freq", "int", 0, "Frequency to update roll", "", &sbBTA252ParamsConfig::roll_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("roll_freq", "int", 0, "Frequency to update roll", "", &sbBTA252ParamsConfig::roll_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.pitch_freq = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.pitch_freq = 255;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.pitch_freq = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("pitch_freq", "int", 0, "Frequency to update pitch", "", &sbBTA252ParamsConfig::pitch_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("pitch_freq", "int", 0, "Frequency to update pitch", "", &sbBTA252ParamsConfig::pitch_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.yaw_freq = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.yaw_freq = 255;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.yaw_freq = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("yaw_freq", "int", 0, "Frequency to update yaw", "", &sbBTA252ParamsConfig::yaw_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("yaw_freq", "int", 0, "Frequency to update yaw", "", &sbBTA252ParamsConfig::yaw_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.depth_freq = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.depth_freq = 255;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.depth_freq = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("depth_freq", "int", 0, "Frequency to update depth", "", &sbBTA252ParamsConfig::depth_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("depth_freq", "int", 0, "Frequency to update depth", "", &sbBTA252ParamsConfig::depth_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __min__.surge_freq = 0;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __max__.surge_freq = 255;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __default__.surge_freq = 1;
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("surge_freq", "int", 0, "Frequency to update surge", "", &sbBTA252ParamsConfig::surge_freq)));
+//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
+      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("surge_freq", "int", 0, "Frequency to update surge", "", &sbBTA252ParamsConfig::surge_freq)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __min__.port = "";
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
@@ -624,16 +690,6 @@ sbBTA252ParamsConfig::GroupDescription<sbBTA252ParamsConfig::DEFAULT, sbBTA252Pa
       Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<bool>("get_status", "bool", 0, "Get the status of this thruster.", "", &sbBTA252ParamsConfig::get_status)));
 //#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<bool>("get_status", "bool", 0, "Get the status of this thruster.", "", &sbBTA252ParamsConfig::get_status)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __min__.depth_frequency = 0;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __max__.depth_frequency = 10;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __default__.depth_frequency = 5;
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      Default.abstract_parameters.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("depth_frequency", "int", 0, "Frequency to update depth vs roll.", "", &sbBTA252ParamsConfig::depth_frequency)));
-//#line 259 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
-      __param_descriptions__.push_back(sbBTA252ParamsConfig::AbstractParamDescriptionConstPtr(new sbBTA252ParamsConfig::ParamDescription<int>("depth_frequency", "int", 0, "Frequency to update depth vs roll.", "", &sbBTA252ParamsConfig::depth_frequency)));
 //#line 233 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
       Default.convertParams();
 //#line 233 "/opt/ros/fuerte/stacks/dynamic_reconfigure/src/dynamic_reconfigure/parameter_generator.py"
