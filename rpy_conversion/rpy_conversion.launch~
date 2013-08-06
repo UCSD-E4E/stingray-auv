@@ -1,6 +1,0 @@
-<node pkg="rpy_conversion" type="quat_to_euler.py" name="imu_euler_angles">
-    <remap from="imu"   to="mstrain_data"/>
-    <remap from="euler" to="microstrain/euler"/>
-</node>
-
-
