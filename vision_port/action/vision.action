@@ -1,8 +1,0 @@
-# Goal definition.
-int32 task
----
-# Result definition.
-int32 result
----
-# Feedback definition.
-int32 subtask
